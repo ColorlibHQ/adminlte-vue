@@ -35,6 +35,17 @@ const isItemActive = computed(() =>
   props.item.type === 'item' ? isActiveHref(props.item.href) : false
 )
 
+// Pass only the prop the link component expects: `href` for a plain <a>,
+// `to` for a router component (NuxtLink/RouterLink) — avoids the
+// "to and href cannot be used together" warning.
+const linkProps = computed<Record<string, unknown>>(() => {
+  if (props.item.type !== 'item') return {}
+  const target = props.item.target
+  return props.linkComponent === 'a'
+    ? { href: props.item.href, target }
+    : { to: props.item.href, target }
+})
+
 // --- group (treeview) state ---
 const groupActive = computed(() =>
   props.item.type === 'group' && props.item.children.some(hasActiveDescendant)
@@ -75,9 +86,7 @@ const transition = computed(() => treeviewTransition(props.animationSpeed))
   <li v-else-if="item.type === 'item'" :class="cn('nav-item', isItemActive && 'active')">
     <component
       :is="linkComponent"
-      :href="item.href"
-      :to="item.href"
-      :target="item.target"
+      v-bind="linkProps"
       :class="cn('nav-link', isItemActive && 'active')"
     >
       <i

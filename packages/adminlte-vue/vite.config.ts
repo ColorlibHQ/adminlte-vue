@@ -1,5 +1,5 @@
 import { fileURLToPath } from 'node:url'
-import { copyFileSync, mkdirSync } from 'node:fs'
+import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -9,35 +9,40 @@ const r = (p: string) => fileURLToPath(new URL(p, import.meta.url))
 
 /**
  * Copy AdminLTE's prebuilt CSS out of the `admin-lte` package into our dist/css,
- * mirroring the React port's `copy-css` build step. Runs once after the bundle
- * is written.
+ * mirroring the React port's `copy-css` build step. The trailing
+ * `sourceMappingURL` comment is stripped — we don't ship the dependency's `.map`,
+ * and leaving it makes consuming bundlers warn about the missing file.
  */
 function copyAdminLteCss() {
   return {
     name: 'adminlte-vue:copy-css',
     closeBundle() {
-      const require = (id: string) =>
-        fileURLToPath(new URL(`./node_modules/${id}`, import.meta.url))
+      const fromRoots = [
+        (id: string) => fileURLToPath(new URL(`./node_modules/${id}`, import.meta.url)),
+        (id: string) => resolve(process.cwd(), '../../node_modules', id),
+      ]
       const pairs: Array<[string, string]> = [
         ['admin-lte/dist/css/adminlte.css', 'dist/css/adminlte.css'],
         ['admin-lte/dist/css/adminlte.rtl.css', 'dist/css/adminlte.rtl.css'],
       ]
       for (const [from, to] of pairs) {
         const dest = r(`./${to}`)
-        try {
-          mkdirSync(dirname(dest), { recursive: true })
-          copyFileSync(require(from), dest)
-        } catch (err) {
-          // Fall back to resolving from the workspace root node_modules (hoisted).
+        let css: string | undefined
+        for (const root of fromRoots) {
           try {
-            copyFileSync(
-              resolve(process.cwd(), '../../node_modules', from),
-              dest
-            )
+            css = readFileSync(root(from), 'utf8')
+            break
           } catch {
-            console.warn(`[adminlte-vue] could not copy ${from}:`, err)
+            /* try the next resolution root */
           }
         }
+        if (css == null) {
+          console.warn(`[adminlte-vue] could not read ${from}`)
+          continue
+        }
+        const stripped = css.replace(/\n?\/\*#\s*sourceMappingURL=.*?\*\/\s*$/, '\n')
+        mkdirSync(dirname(dest), { recursive: true })
+        writeFileSync(dest, stripped)
       }
     },
   }
