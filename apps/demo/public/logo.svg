@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+  <rect width="40" height="40" rx="8" fill="#0d6efd"/>
+  <path d="M20 8 L31 14 V26 L20 32 L9 26 V14 Z" fill="#ffffff" fill-opacity="0.9"/>
+  <text x="20" y="25" font-family="Arial, sans-serif" font-size="13" font-weight="700" fill="#0d6efd" text-anchor="middle">LTE</text>
+</svg>
