@@ -1,0 +1,102 @@
+{
+  "name": "adminlte-vue",
+  "version": "0.1.0",
+  "description": "AdminLTE 4 Vue 3 component library",
+  "license": "MIT",
+  "type": "module",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./plugins": {
+      "types": "./dist/plugins.d.ts",
+      "import": "./dist/plugins.js"
+    },
+    "./css": "./dist/css/adminlte.css",
+    "./css/rtl": "./dist/css/adminlte.rtl.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "./dist/css/*.css",
+    "*.vue"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ColorlibHQ/adminlte-vue"
+  },
+  "keywords": [
+    "admin",
+    "dashboard",
+    "template",
+    "vue",
+    "vue3",
+    "nuxt",
+    "bootstrap",
+    "components",
+    "adminlte"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "type-check": "vue-tsc --noEmit -p tsconfig.json",
+    "lint": "echo 'linting adminlte-vue...'"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0",
+    "bootstrap": "^5.3.0",
+    "apexcharts": "^4.0.0 || ^5.0.0",
+    "tabulator-tables": "^6.0.0",
+    "quill": "^2.0.0",
+    "flatpickr": "^4.6.0",
+    "tom-select": "^2.0.0",
+    "sortablejs": "^1.15.0",
+    "jsvectormap": "^1.5.0",
+    "overlayscrollbars": "^2.0.0",
+    "@fullcalendar/core": "^6.0.0",
+    "@fullcalendar/daygrid": "^6.0.0",
+    "@fullcalendar/interaction": "^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "bootstrap": { "optional": true },
+    "apexcharts": { "optional": true },
+    "tabulator-tables": { "optional": true },
+    "quill": { "optional": true },
+    "flatpickr": { "optional": true },
+    "tom-select": { "optional": true },
+    "sortablejs": { "optional": true },
+    "jsvectormap": { "optional": true },
+    "overlayscrollbars": { "optional": true },
+    "@fullcalendar/core": { "optional": true },
+    "@fullcalendar/daygrid": { "optional": true },
+    "@fullcalendar/interaction": { "optional": true }
+  },
+  "devDependencies": {
+    "@fullcalendar/core": "^6.1.20",
+    "@fullcalendar/daygrid": "^6.1.20",
+    "@fullcalendar/interaction": "^6.1.20",
+    "@types/node": "^22.10.0",
+    "@types/sortablejs": "^1.15.8",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "admin-lte": "^4.0.0",
+    "apexcharts": "^5.13.0",
+    "bootstrap": "^5.3.8",
+    "flatpickr": "^4.6.13",
+    "jsvectormap": "^1.7.0",
+    "overlayscrollbars": "^2.16.0",
+    "quill": "^2.0.3",
+    "sortablejs": "^1.15.7",
+    "tabulator-tables": "^6.4.0",
+    "tom-select": "^2.6.1",
+    "typescript": "^5.6.3",
+    "vite": "^8.0.0",
+    "vite-plugin-dts": "^5.0.1",
+    "vue": "^3.5.35",
+    "vue-tsc": "^3.0.0"
+  }
+}
