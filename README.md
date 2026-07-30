@@ -18,10 +18,10 @@
 
 <p align="center">
   <a href="https://adminlte.io/themes/vue-nuxt/">
-    <img alt="AdminLTE Vue dashboard — light theme" src="docs/screenshots/dashboard-light.png" width="49%">
+    <img alt="AdminLTE Vue dashboard — light theme" src="docs/screenshots/dashboard-light.webp" width="49%">
   </a>
   <a href="https://adminlte.io/themes/vue-nuxt/">
-    <img alt="AdminLTE Vue dashboard — dark theme" src="docs/screenshots/dashboard-dark.png" width="49%">
+    <img alt="AdminLTE Vue dashboard — dark theme" src="docs/screenshots/dashboard-dark.webp" width="49%">
   </a>
 </p>
 
@@ -61,7 +61,7 @@ The same AdminLTE 4 dashboard, in the framework you know best — you're looking
 <!-- ADMINLTE-ECOSYSTEM:END -->
 
 <p align="center">
-  <a href="https://adminlte.io/themes/vue-nuxt/"><img src=".github/preview.png" alt="AdminLTE 4 for Vue — dashboard preview" width="100%"></a>
+  <a href="https://adminlte.io/themes/vue-nuxt/"><img src=".github/preview.webp" alt="AdminLTE 4 for Vue — dashboard preview" width="100%"></a>
 </p>
 
 
@@ -203,18 +203,18 @@ module just automates the wiring above.
 Every screenshot is a real page from the running demo — [browse the live demo →](https://adminlte.io/themes/vue-nuxt/)
 
 <p align="center">
-  <a href="https://adminlte.io/themes/vue-nuxt/index2/"><img alt="Dashboard v2" src="docs/screenshots/dashboard-v2.png" width="32%"></a>
-  <a href="https://adminlte.io/themes/vue-nuxt/index3/"><img alt="Dashboard v3" src="docs/screenshots/dashboard-v3.png" width="32%"></a>
+  <a href="https://adminlte.io/themes/vue-nuxt/index2/"><img alt="Dashboard v2" src="docs/screenshots/dashboard-v2.webp" width="32%"></a>
+  <a href="https://adminlte.io/themes/vue-nuxt/index3/"><img alt="Dashboard v3" src="docs/screenshots/dashboard-v3.webp" width="32%"></a>
   <a href="https://adminlte.io/themes/vue-nuxt/widgets/cards/"><img alt="Widgets — cards, small boxes, info boxes" src="docs/screenshots/widgets.png" width="32%"></a>
 </p>
 <p align="center">
   <a href="https://adminlte.io/themes/vue-nuxt/forms/elements/"><img alt="Form elements" src="docs/screenshots/forms.png" width="32%"></a>
-  <a href="https://adminlte.io/themes/vue-nuxt/tables/data/"><img alt="Data tables (Tabulator)" src="docs/screenshots/tables.png" width="32%"></a>
-  <a href="https://adminlte.io/themes/vue-nuxt/pages/kanban/"><img alt="Kanban board (SortableJS)" src="docs/screenshots/kanban.png" width="32%"></a>
+  <a href="https://adminlte.io/themes/vue-nuxt/tables/data/"><img alt="Data tables (Tabulator)" src="docs/screenshots/tables.webp" width="32%"></a>
+  <a href="https://adminlte.io/themes/vue-nuxt/pages/kanban/"><img alt="Kanban board (SortableJS)" src="docs/screenshots/kanban.webp" width="32%"></a>
 </p>
 <p align="center">
   <a href="https://adminlte.io/themes/vue-nuxt/pages/calendar/"><img alt="Event calendar (FullCalendar)" src="docs/screenshots/calendar.png" width="32%"></a>
-  <a href="https://adminlte.io/themes/vue-nuxt/pages/chat/"><img alt="Chat" src="docs/screenshots/chat.png" width="32%"></a>
+  <a href="https://adminlte.io/themes/vue-nuxt/pages/chat/"><img alt="Chat" src="docs/screenshots/chat.webp" width="32%"></a>
   <a href="https://adminlte.io/themes/vue-nuxt/generate/theme/"><img alt="Theme generator" src="docs/screenshots/theme.png" width="32%"></a>
 </p>
 
@@ -264,7 +264,7 @@ pick up where the free toolkit leaves off.
   <tr>
     <td align="center" width="50%">
       <a href="https://dashboardpack.com/theme-details/haze-dashboard-nuxt/?utm_source=github&utm_medium=readme&utm_campaign=adminlte-vue">
-        <img src="docs/screenshots/dashboardpack/haze.png" alt="Haze — premium Nuxt 4 admin dashboard" width="100%">
+        <img src="docs/screenshots/dashboardpack/haze.webp" alt="Haze — premium Nuxt 4 admin dashboard" width="100%">
       </a>
       <br>
       <a href="https://dashboardpack.com/theme-details/haze-dashboard-nuxt/?utm_source=github&utm_medium=readme&utm_campaign=adminlte-vue"><strong>Haze — Nuxt</strong></a>
@@ -273,7 +273,7 @@ pick up where the free toolkit leaves off.
     </td>
     <td align="center" width="50%">
       <a href="https://dashboardpack.com/theme-details/architectui-dashboard-vue-pro/?utm_source=github&utm_medium=readme&utm_campaign=adminlte-vue">
-        <img src="docs/screenshots/dashboardpack/architectui-vue.png" alt="ArchitectUI — premium Vue 3 + Vuetify admin dashboard" width="100%">
+        <img src="docs/screenshots/dashboardpack/architectui-vue.webp" alt="ArchitectUI — premium Vue 3 + Vuetify admin dashboard" width="100%">
       </a>
       <br>
       <a href="https://dashboardpack.com/theme-details/architectui-dashboard-vue-pro/?utm_source=github&utm_medium=readme&utm_campaign=adminlte-vue"><strong>ArchitectUI — Vue Pro</strong></a>
@@ -284,7 +284,7 @@ pick up where the free toolkit leaves off.
   <tr>
     <td align="center" width="50%">
       <a href="https://dashboardpack.com/theme-details/apex-dashboard-nextjs/?utm_source=github&utm_medium=readme&utm_campaign=adminlte-vue">
-        <img src="docs/screenshots/dashboardpack/apex.png" alt="Apex Dashboard — Next.js admin template with shadcn/ui" width="100%">
+        <img src="docs/screenshots/dashboardpack/apex.webp" alt="Apex Dashboard — Next.js admin template with shadcn/ui" width="100%">
       </a>
       <br>
       <a href="https://dashboardpack.com/theme-details/apex-dashboard-nextjs/?utm_source=github&utm_medium=readme&utm_campaign=adminlte-vue"><strong>Apex Dashboard — Next.js</strong></a>
@@ -293,7 +293,7 @@ pick up where the free toolkit leaves off.
     </td>
     <td align="center" width="50%">
       <a href="https://dashboardpack.com/theme-details/admindek-html/?utm_source=github&utm_medium=readme&utm_campaign=adminlte-vue">
-        <img src="docs/screenshots/dashboardpack/admindek.png" alt="Admindek — feature-rich Bootstrap 5 dashboard" width="100%">
+        <img src="docs/screenshots/dashboardpack/admindek.webp" alt="Admindek — feature-rich Bootstrap 5 dashboard" width="100%">
       </a>
       <br>
       <a href="https://dashboardpack.com/theme-details/admindek-html/?utm_source=github&utm_medium=readme&utm_campaign=adminlte-vue"><strong>Admindek — HTML</strong></a>
