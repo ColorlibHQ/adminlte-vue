@@ -18,6 +18,8 @@ withDefaults(
     currentPath?: string
     accordion?: boolean
     linkComponent?: string | Component
+    /** Navigation callback (e.g. `router.push`) used for in-app link clicks. */
+    navigate?: (href: string) => void
     animationSpeed?: number
   }>(),
   {
@@ -66,6 +68,7 @@ onBeforeUnmount(() => osInstance?.destroy?.())
           :current-path="currentPath"
           :accordion="accordion"
           :link-component="linkComponent"
+          :navigate="navigate"
           :animation-speed="animationSpeed"
         />
       </slot>

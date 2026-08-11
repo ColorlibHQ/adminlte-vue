@@ -12,6 +12,13 @@ const props = withDefaults(
     parentKey?: string
     /** Component/tag used for links (e.g. NuxtLink). Defaults to a plain `<a>`. */
     linkComponent?: string | Component
+    /**
+     * Navigation callback (e.g. `router.push`). When set, plain in-app link
+     * clicks are intercepted and routed through it instead of doing a full page
+     * load. Modified clicks, `target="_blank"`, external/placeholder hrefs and
+     * clicks a link component already handled are left to the browser/router.
+     */
+    navigate?: (href: string) => void
     animationSpeed?: number
   }>(),
   { depth: 0, parentKey: 'root', linkComponent: 'a', animationSpeed: 300 }
@@ -37,14 +44,30 @@ const isItemActive = computed(() =>
 
 // Pass only the prop the link component expects: `href` for a plain <a>,
 // `to` for a router component (NuxtLink/RouterLink) — avoids the
-// "to and href cannot be used together" warning.
+// "to and href cannot be used together" warning. Node `attrs` (data-*, aria-*,
+// rel, …) come first so they can never clobber the resolved link target.
 const linkProps = computed<Record<string, unknown>>(() => {
   if (props.item.type !== 'item') return {}
-  const target = props.item.target
+  const { href, target, attrs } = props.item
   return props.linkComponent === 'a'
-    ? { href: props.item.href, target }
-    : { to: props.item.href, target }
+    ? { ...attrs, href, target }
+    : { ...attrs, to: href, target }
 })
+
+// Only intercept clicks the browser would turn into a full page load.
+function onLinkClick(e: MouseEvent) {
+  if (!props.navigate || props.item.type !== 'item') return
+  // A router link component (NuxtLink/RouterLink) already handled it.
+  if (e.defaultPrevented) return
+  if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+  if (props.item.target && props.item.target !== '_self') return
+  const href = props.item.href
+  // Placeholder, protocol-relative, absolute-URL and hash-only links stay native.
+  if (!href || href.startsWith('#') || href.startsWith('//') || /^[a-z][a-z\d+.-]*:/i.test(href))
+    return
+  e.preventDefault()
+  props.navigate(href)
+}
 
 // --- group (treeview) state ---
 const groupActive = computed(() =>
@@ -88,6 +111,7 @@ const transition = computed(() => treeviewTransition(props.animationSpeed))
       :is="linkComponent"
       v-bind="linkProps"
       :class="cn('nav-link', isItemActive && 'active')"
+      @click="onLinkClick"
     >
       <i
         v-if="item.icon"
@@ -105,7 +129,13 @@ const transition = computed(() => treeviewTransition(props.animationSpeed))
 
   <!-- Group (collapsible) -->
   <li v-else :class="cn('nav-item', isOpen && 'menu-open')">
-    <button type="button" class="nav-link" :aria-expanded="isOpen" @click="toggle">
+    <button
+      v-bind="item.attrs"
+      type="button"
+      class="nav-link"
+      :aria-expanded="isOpen"
+      @click="toggle"
+    >
       <i v-if="item.icon" :class="cn('nav-icon', biClass(item.icon))"></i>
       <p>
         {{ item.text }}
@@ -127,6 +157,7 @@ const transition = computed(() => treeviewTransition(props.animationSpeed))
           :depth="depth + 1"
           :parent-key="id"
           :link-component="linkComponent"
+          :navigate="navigate"
           :animation-speed="animationSpeed"
         />
       </ul>

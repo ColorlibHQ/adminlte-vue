@@ -34,6 +34,8 @@ const {
   navbarClass,
   bodyClass,
   currentPath = '/',
+  footerRightText,
+  footerYear,
   brandText,
   linkComponent = 'a',
   accordion = false,
@@ -100,6 +102,18 @@ useAccessibility()
     >
       <template #start><slot name="topbar-start" /></template>
       <template #end><slot name="topbar-end" /></template>
+      <template v-if="$slots['user-menu']" #user-menu="slotProps">
+        <slot name="user-menu" v-bind="slotProps" />
+      </template>
+      <template v-if="$slots['user-header']" #user-header="slotProps">
+        <slot name="user-header" v-bind="slotProps" />
+      </template>
+      <template v-if="$slots['user-body']" #user-body="slotProps">
+        <slot name="user-body" v-bind="slotProps" />
+      </template>
+      <template v-if="$slots['user-footer']" #user-footer="slotProps">
+        <slot name="user-footer" v-bind="slotProps" />
+      </template>
     </LteTopbar>
 
     <LteSidebar
@@ -112,6 +126,7 @@ useAccessibility()
       :current-path="currentPath"
       :accordion="accordion"
       :link-component="linkComponent"
+      :navigate="navigate"
     >
       <template v-if="$slots['sidebar-brand']" #brand><slot name="sidebar-brand" /></template>
       <template v-if="$slots.logo" #logo><slot name="logo" /></template>
@@ -121,8 +136,9 @@ useAccessibility()
       <slot />
     </main>
 
-    <LteFooter>
+    <LteFooter :right-text="footerRightText" :year="footerYear">
       <slot name="footer" />
+      <template v-if="$slots['footer-right']" #right><slot name="footer-right" /></template>
     </LteFooter>
   </div>
 

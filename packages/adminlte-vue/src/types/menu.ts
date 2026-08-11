@@ -1,6 +1,13 @@
 import type { BootstrapTheme } from './theme'
 
 /**
+ * Extra attributes forwarded verbatim to the element a menu node renders
+ * (the `<a>` for an item, the toggle `<button>` for a group) — e.g. `data-*`
+ * hooks, `aria-*`, `rel` or `title`.
+ */
+export type MenuNodeAttrs = Record<string, string | number | boolean>
+
+/**
  * Menu header item (non-interactive section label).
  */
 export interface MenuHeader {
@@ -21,6 +28,8 @@ export interface MenuItem {
   badge?: string | number
   badgeColor?: BootstrapTheme
   target?: '_blank' | '_self'
+  /** Extra attributes spread onto the rendered link (`data-*`, `aria-*`, `rel`, …). */
+  attrs?: MenuNodeAttrs
 }
 
 /**
@@ -34,6 +43,8 @@ export interface MenuGroup {
   badge?: string | number
   badgeColor?: BootstrapTheme
   children: MenuNode[]
+  /** Extra attributes spread onto the group's toggle button (`data-*`, `aria-*`, …). */
+  attrs?: MenuNodeAttrs
 }
 
 /**

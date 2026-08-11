@@ -48,6 +48,10 @@ export interface DashboardLayoutProps {
   bodyClass?: string
   /** Current route path, used for active-link detection in the sidebar. */
   currentPath?: string
+  /** Right-aligned footer text (forwarded to `LteFooter`'s `rightText`). */
+  footerRightText?: string
+  /** Year used in the default footer copyright line (forwarded to `LteFooter`). */
+  footerYear?: number | string
 }
 
 /**

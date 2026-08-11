@@ -20,6 +20,10 @@ const props = withDefaults(
 
 const emit = defineEmits<{ logout: []; profile: [] }>()
 
+// Exposed to the `user-footer` slot so custom markup can raise the same events.
+const onProfile = () => emit('profile')
+const onLogout = () => emit('logout')
+
 const { toggle } = useSidebar()
 const commandPalette = useCommandPalette()
 
@@ -64,24 +68,32 @@ const resolvedUser = computed<TopbarUser>(
             <span class="d-none d-md-inline">{{ resolvedUser.name }}</span>
           </a>
           <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-end">
-            <li class="user-header text-bg-primary">
-              <img :src="resolvedUser.image" class="rounded-circle shadow" :alt="resolvedUser.name" />
-              <p>
-                {{ resolvedUser.name }}<template v-if="resolvedUser.role"> - {{ resolvedUser.role }}</template>
-                <small v-if="resolvedUser.memberSince">Member since {{ resolvedUser.memberSince }}</small>
-              </p>
-            </li>
-            <li class="user-body">
-              <div class="row">
-                <div class="col-4 text-center"><a href="#">Followers</a></div>
-                <div class="col-4 text-center"><a href="#">Sales</a></div>
-                <div class="col-4 text-center"><a href="#">Friends</a></div>
-              </div>
-            </li>
-            <li class="user-footer">
-              <a href="#" class="btn btn-outline-secondary" @click.prevent="emit('profile')">Profile</a>
-              <a href="#" class="btn btn-outline-danger float-end" @click.prevent="emit('logout')">Sign out</a>
-            </li>
+            <slot name="user-menu" :user="resolvedUser">
+              <li class="user-header text-bg-primary">
+                <slot name="user-header" :user="resolvedUser">
+                  <img :src="resolvedUser.image" class="rounded-circle shadow" :alt="resolvedUser.name" />
+                  <p>
+                    {{ resolvedUser.name }}<template v-if="resolvedUser.role"> - {{ resolvedUser.role }}</template>
+                    <small v-if="resolvedUser.memberSince">Member since {{ resolvedUser.memberSince }}</small>
+                  </p>
+                </slot>
+              </li>
+              <li class="user-body">
+                <slot name="user-body" :user="resolvedUser">
+                  <div class="row">
+                    <div class="col-4 text-center"><a href="#">Followers</a></div>
+                    <div class="col-4 text-center"><a href="#">Sales</a></div>
+                    <div class="col-4 text-center"><a href="#">Friends</a></div>
+                  </div>
+                </slot>
+              </li>
+              <li class="user-footer">
+                <slot name="user-footer" :user="resolvedUser" :profile="onProfile" :logout="onLogout">
+                  <a href="#" class="btn btn-outline-secondary" @click.prevent="onProfile">Profile</a>
+                  <a href="#" class="btn btn-outline-danger float-end" @click.prevent="onLogout">Sign out</a>
+                </slot>
+              </li>
+            </slot>
           </ul>
         </li>
       </ul>

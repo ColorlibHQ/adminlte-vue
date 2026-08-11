@@ -10,6 +10,8 @@ const props = withDefaults(
     currentPath?: string
     accordion?: boolean
     linkComponent?: string | Component
+    /** Navigation callback (e.g. `router.push`) used for in-app link clicks. */
+    navigate?: (href: string) => void
     animationSpeed?: number
   }>(),
   { currentPath: '/', accordion: false, linkComponent: 'a', animationSpeed: 300 }
@@ -34,6 +36,7 @@ provideTreeviewRegistry(props.accordion)
         :depth="0"
         parent-key="root"
         :link-component="linkComponent"
+        :navigate="navigate"
         :animation-speed="animationSpeed"
       />
     </ul>

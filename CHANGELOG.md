@@ -8,7 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-_No unreleased changes yet._
+### Added
+
+Customization gaps reported in [#2](https://github.com/ColorlibHQ/adminlte-vue/issues/2):
+
+- **Topbar user-dropdown slots.** `LteTopbar` now renders its `user-header`, `user-body` and `user-footer` blocks through same-named slots (plus `user-menu` to replace the dropdown body wholesale), and `LteDashboardLayout` forwards all four — the stock "Followers / Sales / Friends" row and "Profile / Sign out" buttons are no longer hard-coded. Each slot receives the resolved `user`; `user-footer` also receives `profile` / `logout` callbacks so custom buttons keep raising the layout's events. Defaults are unchanged when no slot is passed.
+- **Footer props on the layout.** `LteDashboardLayout` gained `footerRightText` and `footerYear` props plus a `footer-right` slot, forwarded to `LteFooter` — previously reachable only by mounting `LteFooter` yourself.
+- **`attrs` on menu nodes.** `MenuItem.attrs` is spread onto the rendered sidebar link and `MenuGroup.attrs` onto the group's toggle button, for `data-*` test/analytics hooks, `aria-*`, `rel`, `title`. The resolved link target always wins, so `attrs` can't overwrite `href` / `to`.
+- **Sidebar links honor `navigate`.** The `navigate` callback passed to `LteDashboardLayout` now also drives sidebar navigation, not just the ⌘K command palette — client-side routing without passing a `linkComponent`. Interception is conservative: modified/middle clicks, `target="_blank"`, external, protocol-relative and hash-only hrefs stay native, and a click a router link component already handled is left alone, so passing both `linkComponent` and `navigate` never navigates twice.
 
 ## [0.3.0] - 2026-07-02
 
