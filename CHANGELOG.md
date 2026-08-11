@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+_No unreleased changes yet._
+
+## [0.4.0] - 2026-08-11
+
+Customization work driven by [#2](https://github.com/ColorlibHQ/adminlte-vue/issues/2), a security
+hardening pass, and a CI repair. Everything here is additive — no breaking changes, and defaults
+render exactly as before.
+
 ### Added
 
 Customization gaps reported in [#2](https://github.com/ColorlibHQ/adminlte-vue/issues/2):
@@ -25,7 +33,11 @@ exploited issue — these close sharp edges found while auditing.
 
 - **`LteTimeline` raw-HTML fields are now flagged and have a safe alternative.** `TimelineItem.body` / `.footer` are written with `v-html` (AdminLTE's markup calls for it), which makes them a stored-XSS sink for anyone piping user-generated content through a timeline. The `TimelineItem` JSDoc was also actively misleading — it claimed markup came from the default slot. Both fields now carry an explicit trusted-content warning in the types and the docs, and the new `body` / `footer` slots give an escaped path for untrusted content.
 - **The Nuxt module's theme script no longer interpolates config verbatim.** `initialColorMode` was substituted straight into the inline `<script>` whose head sanitizer the module deliberately disables; it is now validated against `light | dark | auto` and falls back to `auto`. Not reachable from user input (it comes from `nuxt.config`), but an untyped or runtime-assembled config value would have been script injection rather than a broken theme.
-- **`pnpm audit` is clean again** (was 7 high). All seven were DoS-class advisories in build-time transitive dependencies of the docs app — none reachable from the published library, which externalizes its dependencies. Fixed with four targeted `pnpm.overrides` (`brace-expansion@>=3`, `js-yaml@4`, `ws@8`, `socket.io-parser@4`) rather than a major bump. `@nuxt/content` is pinned to `~3.14.0`: 3.15.x pulls `@nuxt/kit@4.5.2 → unctx@3.0.0 → unplugin → vite@8.0.14`, which adds seven *new* advisories (vite, postcss, nanoid, esbuild) and three unmet peer dependencies. Revisit when that chain is patched upstream.
+- **`pnpm audit` is clean again** (was 7 high, now 0). All seven were DoS-class advisories in build-time transitive dependencies of the docs app — none reachable from the published library, which externalizes its dependencies. Fixed with four targeted `pnpm.overrides` (`brace-expansion@>=3`, `js-yaml@4`, `ws@8`, `socket.io-parser@4`) rather than a major bump. `@nuxt/content` is pinned to `~3.14.0`: 3.15.x pulls `@nuxt/kit@4.5.2 → unctx@3.0.0 → unplugin → vite@8.0.14`, which adds seven *new* advisories (vite, postcss, nanoid, esbuild) and three unmet peer dependencies. Revisit when that chain is patched upstream.
+
+### Fixed
+
+- **CI runs again.** The workflow had failed on every run since 2026-06-11, for two reasons unrelated to the code under test: `pnpm/action-setup@v4` hard-errors when both a `version:` input and package.json's `packageManager` key specify a version (the input is gone; `packageManager` is the source of truth), and the root `build` script passed an unquoted `./packages/*` to `--filter`, which the shell expanded into two paths so pnpm read the second as a script name. The setup failure had masked the second bug entirely.
 
 ## [0.3.0] - 2026-07-02
 
@@ -176,6 +188,8 @@ React and Laravel editions.
 - Library JS ships only `dist/css/adminlte.css`; consumers provide Bootstrap Icons, OverlayScrollbars,
   fonts, and plugin CSS (see the demo's `nuxt.config.ts`).
 
-[Unreleased]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.3.0...v0.4.0
+[0.3.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.1.0...v0.3.0
 [0.2.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/ColorlibHQ/adminlte-vue/releases/tag/v0.1.0
