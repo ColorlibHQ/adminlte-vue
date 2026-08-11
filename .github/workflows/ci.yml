@@ -11,9 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # No `version:` input — it conflicts with the `packageManager` key in
+      # package.json and the action hard-errors on the ambiguity.
       - uses: pnpm/action-setup@v4
-        with:
-          version: 9
 
       - uses: actions/setup-node@v4
         with:
