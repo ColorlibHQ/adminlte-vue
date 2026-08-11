@@ -181,7 +181,15 @@ export default defineNuxtModule<AdminlteModuleOptions>({
 
     // Blocking head script — sets `data-bs-theme` before first paint (no FOUC).
     if (options.themeScript !== false) {
-      const fallback = options.defaults?.initialColorMode ?? 'auto'
+      // Whitelisted, never interpolated verbatim: this string lands inside an
+      // inline <script> whose head sanitizer is disabled below, so a bad value
+      // from nuxt.config (untyped JS, or config assembled at runtime) would be
+      // script injection rather than a broken theme.
+      const configured = options.defaults?.initialColorMode
+      const fallback =
+        configured === 'light' || configured === 'dark' || configured === 'auto'
+          ? configured
+          : 'auto'
       nuxt.options.app.head ||= {}
       nuxt.options.app.head.script ||= []
       nuxt.options.app.head.script.push({

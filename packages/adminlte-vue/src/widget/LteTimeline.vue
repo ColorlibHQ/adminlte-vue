@@ -18,8 +18,20 @@ defineProps<{ items: TimelineItem[] }>()
           <a v-if="item.url" :href="item.url">{{ item.title }}</a>
           <template v-else>{{ item.title }}</template>
         </h3>
-        <div v-if="item.body" class="timeline-body" v-html="item.body"></div>
-        <div v-if="item.footer" class="timeline-footer" v-html="item.footer"></div>
+        <!--
+          `item.body` / `item.footer` are inserted as raw HTML for AdminLTE
+          fidelity, so they must be trusted strings. Untrusted content belongs
+          in the `body` / `footer` slots, which Vue escapes.
+        -->
+        <div v-if="$slots.body" class="timeline-body">
+          <slot name="body" :item="item" :index="idx" />
+        </div>
+        <div v-else-if="item.body" class="timeline-body" v-html="item.body"></div>
+
+        <div v-if="$slots.footer" class="timeline-footer">
+          <slot name="footer" :item="item" :index="idx" />
+        </div>
+        <div v-else-if="item.footer" class="timeline-footer" v-html="item.footer"></div>
       </div>
     </div>
   </div>
