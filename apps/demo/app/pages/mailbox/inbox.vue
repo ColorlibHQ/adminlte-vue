@@ -161,11 +161,12 @@
                         <a
                           href="../mailbox/read.html"
                           class="flex-grow-1 d-flex flex-column flex-md-row gap-md-3 text-decoration-none text-body"
+                          style="min-width: 0"
                         >
                           <span class="text-truncate" style="min-width: 9rem">
                             Olivia Bennett
                           </span>
-                          <span class="flex-grow-1 text-truncate">
+                          <span class="flex-grow-1 text-truncate" style="min-width: 0">
                             <span class="badge text-bg-primary me-2"> &middot; </span>
                             Re: design system v2.4 sign-off
                             <span class="fw-normal text-secondary">
@@ -198,9 +199,10 @@
                         <a
                           href="../mailbox/read.html"
                           class="flex-grow-1 d-flex flex-column flex-md-row gap-md-3 text-decoration-none text-body"
+                          style="min-width: 0"
                         >
                           <span class="text-truncate" style="min-width: 9rem"> GitHub </span>
-                          <span class="flex-grow-1 text-truncate">
+                          <span class="flex-grow-1 text-truncate" style="min-width: 0">
                             <span class="badge text-bg-secondary me-2"> &middot; </span>
                             [fullcalendar/fullcalendar] PR #6912 merged
                             <span class="fw-normal text-secondary">
@@ -232,9 +234,10 @@
                         <a
                           href="../mailbox/read.html"
                           class="flex-grow-1 d-flex flex-column flex-md-row gap-md-3 text-decoration-none text-body"
+                          style="min-width: 0"
                         >
                           <span class="text-truncate" style="min-width: 9rem"> Stripe </span>
-                          <span class="flex-grow-1 text-truncate">
+                          <span class="flex-grow-1 text-truncate" style="min-width: 0">
                             <span class="badge text-bg-success me-2"> &middot; </span>
                             Your May invoice is ready
                             <span class="fw-normal text-secondary">
@@ -264,9 +267,10 @@
                         <a
                           href="../mailbox/read.html"
                           class="flex-grow-1 d-flex flex-column flex-md-row gap-md-3 text-decoration-none text-body"
+                          style="min-width: 0"
                         >
                           <span class="text-truncate" style="min-width: 9rem"> Marcus Reyes </span>
-                          <span class="flex-grow-1 text-truncate">
+                          <span class="flex-grow-1 text-truncate" style="min-width: 0">
                             <span class="badge text-bg-info me-2"> &middot; </span>
                             Lunch on Thursday?
                             <span class="fw-normal text-secondary">
@@ -296,9 +300,10 @@
                         <a
                           href="../mailbox/read.html"
                           class="flex-grow-1 d-flex flex-column flex-md-row gap-md-3 text-decoration-none text-body"
+                          style="min-width: 0"
                         >
                           <span class="text-truncate" style="min-width: 9rem"> Linear </span>
-                          <span class="flex-grow-1 text-truncate">
+                          <span class="flex-grow-1 text-truncate" style="min-width: 0">
                             <span class="badge text-bg-warning me-2"> &middot; </span>
                             [ADM-441] Calendar drag-and-drop not working on Safari iOS
                             <span class="fw-normal text-secondary">
@@ -329,9 +334,10 @@
                         <a
                           href="../mailbox/read.html"
                           class="flex-grow-1 d-flex flex-column flex-md-row gap-md-3 text-decoration-none text-body"
+                          style="min-width: 0"
                         >
                           <span class="text-truncate" style="min-width: 9rem"> Vercel </span>
-                          <span class="flex-grow-1 text-truncate">
+                          <span class="flex-grow-1 text-truncate" style="min-width: 0">
                             <span class="badge text-bg-success me-2"> &middot; </span>
                             Deployment succeeded — production
                             <span class="fw-normal text-secondary">
@@ -361,9 +367,10 @@
                         <a
                           href="../mailbox/read.html"
                           class="flex-grow-1 d-flex flex-column flex-md-row gap-md-3 text-decoration-none text-body"
+                          style="min-width: 0"
                         >
                           <span class="text-truncate" style="min-width: 9rem"> Sara Khan </span>
-                          <span class="flex-grow-1 text-truncate">
+                          <span class="flex-grow-1 text-truncate" style="min-width: 0">
                             <span class="badge text-bg-primary me-2"> &middot; </span>
                             Customer interview notes — Acme Corp
                             <span class="fw-normal text-secondary">
@@ -394,9 +401,10 @@
                         <a
                           href="../mailbox/read.html"
                           class="flex-grow-1 d-flex flex-column flex-md-row gap-md-3 text-decoration-none text-body"
+                          style="min-width: 0"
                         >
                           <span class="text-truncate" style="min-width: 9rem"> AWS </span>
-                          <span class="flex-grow-1 text-truncate">
+                          <span class="flex-grow-1 text-truncate" style="min-width: 0">
                             <span class="badge text-bg-danger me-2"> &middot; </span>
                             Your monthly bill summary
                             <span class="fw-normal text-secondary">

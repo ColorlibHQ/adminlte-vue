@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
+import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest'
 import { mount } from '@vue/test-utils'
 import LteDashboardLayout from './LteDashboardLayout.vue'
 import type { MenuNode } from '../types/menu'
@@ -90,5 +90,43 @@ describe('LteDashboardLayout footer', () => {
   it('forwards the footer-right slot', () => {
     const wrapper = mountLayout({ slots: { 'footer-right': '<b class="ver">nightly</b>' } })
     expect(wrapper.find('.app-footer .float-end .ver').text()).toBe('nightly')
+  })
+})
+
+describe('LteDashboardLayout direction', () => {
+  afterEach(() => {
+    document.documentElement.removeAttribute('dir')
+  })
+
+  it('leaves the document alone when no dir is given', () => {
+    const wrapper = mountLayout()
+    expect(document.documentElement.hasAttribute('dir')).toBe(false)
+    expect(wrapper.find('.app-wrapper').attributes('dir')).toBeUndefined()
+  })
+
+  it('writes dir on <html> and on the wrapper', () => {
+    const wrapper = mountLayout({ props: { dir: 'rtl' } })
+    expect(document.documentElement.getAttribute('dir')).toBe('rtl')
+    expect(wrapper.find('.app-wrapper').attributes('dir')).toBe('rtl')
+  })
+
+  it('follows dir changes', async () => {
+    const wrapper = mountLayout({ props: { dir: 'rtl' } })
+    await wrapper.setProps({ dir: 'ltr' })
+    expect(document.documentElement.getAttribute('dir')).toBe('ltr')
+  })
+
+  it('clears dir on unmount so an RTL route cannot leak into an LTR app', () => {
+    const wrapper = mountLayout({ props: { dir: 'rtl' } })
+    wrapper.unmount()
+    expect(document.documentElement.hasAttribute('dir')).toBe(false)
+  })
+
+  it('restores a pre-existing dir instead of removing it', () => {
+    document.documentElement.setAttribute('dir', 'ltr')
+    const wrapper = mountLayout({ props: { dir: 'rtl' } })
+    expect(document.documentElement.getAttribute('dir')).toBe('rtl')
+    wrapper.unmount()
+    expect(document.documentElement.getAttribute('dir')).toBe('ltr')
   })
 })

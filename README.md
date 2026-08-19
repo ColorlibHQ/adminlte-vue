@@ -195,6 +195,7 @@ module just automates the wiring above.
 | `useDirectChat()` | Direct-chat contacts pane toggle. |
 | `useSortable(el, opts)` | SortableJS on a ref (lazy-loaded). |
 | `useCommandPalette()` | Open/close the ⌘K palette. |
+| `useDirection(dir)` | Apply `dir` to `<html>` while mounted; restores it on unmount. |
 | `treeviewTransition(speed)` | Height transition hooks for the sidebar treeview. |
 
 `useSidebar` / `useColorMode` / `useCommandPalette` are provided by `<LteDashboardLayout>`.

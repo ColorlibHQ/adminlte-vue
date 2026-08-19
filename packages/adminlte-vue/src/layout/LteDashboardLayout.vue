@@ -6,6 +6,7 @@ import { cn } from '../lib/class-name'
 import { provideSidebar } from '../composables/use-sidebar'
 import { provideColorMode } from '../composables/use-color-mode'
 import { provideCommandPalette } from '../composables/use-command-palette'
+import { useDirection } from '../composables/use-direction'
 import { useLteBehaviors } from '../composables/use-lte-behaviors'
 import { useAccessibility } from '../composables/use-accessibility'
 import LteTopbar from './LteTopbar.vue'
@@ -34,6 +35,7 @@ const {
   navbarClass,
   bodyClass,
   currentPath = '/',
+  dir,
   footerRightText,
   footerYear,
   brandText,
@@ -86,13 +88,20 @@ provideCommandPalette()
 
 const emit = defineEmits<{ logout: []; profile: [] }>()
 
+// `dir` on <html> for as long as this layout is mounted (restored on unmount so
+// a single RTL route can't leak into the rest of an LTR app). The wrapper below
+// carries it too, so server-rendered markup is already directional before
+// hydration. The matching RTL stylesheet is the consumer's to load — see
+// `useDirection`.
+useDirection(() => dir)
+
 // Behaviors + accessibility for raw markup placed in slots.
 useLteBehaviors()
 useAccessibility()
 </script>
 
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper" :dir="dir">
     <LteTopbar
       :user="user"
       :color-mode-toggle="colorModeToggle"

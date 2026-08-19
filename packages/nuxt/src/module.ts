@@ -111,6 +111,7 @@ const COMPOSABLES = [
   'useDirectChat',
   'useSortable',
   'useCommandPalette',
+  'useDirection',
 ] as const
 
 const module: NuxtModule<AdminlteModuleOptions> = defineNuxtModule<AdminlteModuleOptions>({
@@ -164,9 +165,18 @@ const module: NuxtModule<AdminlteModuleOptions> = defineNuxtModule<AdminlteModul
       }
     }
 
-    // Inject the library CSS.
+    // Inject the library CSS. `defaults.dir: 'rtl'` swaps in the RTL build of
+    // the sheet (a full flipped copy, not an overlay — the two must never be
+    // loaded together) and marks the document as RTL server-side. Apps that are
+    // only *partly* RTL leave this alone and pass `dir` per layout instead,
+    // loading `@adminlte/vue/css/rtl` for those routes themselves.
+    const rtl = options.defaults?.dir === 'rtl'
     if (options.css !== false) {
-      nuxt.options.css.push('@adminlte/vue/css')
+      nuxt.options.css.push(rtl ? '@adminlte/vue/css/rtl' : '@adminlte/vue/css')
+    }
+    if (rtl) {
+      nuxt.options.app.head ||= {}
+      nuxt.options.app.head.htmlAttrs = { ...nuxt.options.app.head.htmlAttrs, dir: 'rtl' }
     }
 
     // Surface layout defaults to the runtime + the useAdminlteConfig() composable.

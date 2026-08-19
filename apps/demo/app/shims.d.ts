@@ -14,3 +14,10 @@ declare module '@adminlte/vue/css/rtl'
 declare module '@adminlte/vue/css/colors'
 declare module '@adminlte/vue/css/colors/v3'
 declare module '@adminlte/vue/css/docs'
+
+// Asset-URL form of the same export: Vite emits the file and hands back its URL
+// instead of injecting it, so DemoLayout can add/remove it per route.
+declare module '@adminlte/vue/css/rtl?url' {
+  const src: string
+  export default src
+}

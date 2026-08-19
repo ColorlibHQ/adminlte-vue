@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { computed, resolveComponent } from 'vue'
+// Emitted as a plain asset (never auto-injected) so the RTL sheet can be added
+// and removed per route — see the `useHead` call below.
+import rtlStylesheet from '@adminlte/vue/css/rtl?url'
 import { menu } from '~/lib/menu'
 import type { MenuNode, NavMessage, NavNotification } from '@adminlte/vue'
 
@@ -43,6 +46,38 @@ const layout = computed(() => ({
   enableSidebarPersistence: config.enableSidebarPersistence ?? false,
   dir: props.dir ?? config.dir,
 }))
+
+// `dir` alone only flips inline direction — Bootstrap/AdminLTE ship a separate
+// RTL build of the stylesheet. This demo is LTR apart from one route, so the RTL
+// sheet is loaded for that route only (last in <head>, so it wins over the LTR
+// bundle) and torn down by unhead when the layout unmounts. The `dir` attribute
+// itself is handled inside <LteDashboardLayout>.
+//
+// The href is normalized and keyed on purpose: Vite resolves the asset through
+// `import.meta.url` on the client (absolute) but emits a base-relative path
+// during SSR, and unhead reconciles by value — mismatched hrefs left the
+// server-rendered <link> orphaned in <head>, i.e. the RTL sheet stayed applied
+// on every route visited afterwards.
+const rtlStylesheetHref = rtlStylesheet.replace(/^[a-z][a-z\d+\-.]*:\/\/[^/]+/i, '')
+
+useHead({
+  link: computed(() =>
+    layout.value.dir === 'rtl'
+      ? [
+          {
+            key: 'adminlte-rtl',
+            rel: 'stylesheet',
+            href: rtlStylesheetHref,
+            // Matches the `crossorigin` on Nuxt's own preload hint for this
+            // asset — without it the browser refuses to reuse the preload and
+            // downloads the sheet twice.
+            crossorigin: 'anonymous' as const,
+            tagPriority: 'low' as const,
+          },
+        ]
+      : []
+  ),
+})
 
 const user = {
   name: 'Alexander Pierce',

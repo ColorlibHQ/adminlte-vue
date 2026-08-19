@@ -66,9 +66,9 @@ import { LteApexChart } from '@adminlte/vue/plugins'
 ## Composables
 
 `useSidebar`, `useColorMode`, `useCardWidget`, `useTreeviewRegistry`/`treeviewTransition`,
-`useFullscreen`, `useDirectChat`, `useSortable`, `useCommandPalette`. Sidebar and color-mode
-state are provided by `<LteDashboardLayout>` and consumed via `inject` — the Vue equivalent of the
-React port's Context + hooks.
+`useFullscreen`, `useDirectChat`, `useSortable`, `useCommandPalette`, `useDirection`. Sidebar and
+color-mode state are provided by `<LteDashboardLayout>` and consumed via `inject` — the Vue
+equivalent of the React port's Context + hooks.
 
 ## Notes
 

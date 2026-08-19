@@ -8,7 +8,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-_No unreleased changes yet._
+Three defects found by a live audit of
+[adminlte.io/themes/vue-nuxt](https://adminlte.io/themes/vue-nuxt/): one functional (the RTL layout
+page was not RTL at all), two cosmetic. Slated for **0.7.0, not 0.6.1** — the RTL repair is not a
+demo patch. `<LteDashboardLayout>`'s `dir` prop was accepted and then dropped on the floor, so
+making it work changes the behaviour of the published component, adds a new exported composable
+(`useDirection`, also auto-imported by `@adminlte/nuxt`), and makes `adminlte.defaults.dir` in the
+Nuxt module do something it never did. New public API in the shipped packages is a minor, not a
+patch.
+
+### Fixed
+
+- **The RTL layout demo is actually RTL.** `<LteDashboardLayout>` declared a `dir` prop but never
+  read it: it was not destructured from `defineProps()` and was rendered nowhere, and because Vue
+  treats a declared prop as consumed it did not fall through to an element either. The demo page
+  duly passed `dir="rtl"` into a black hole, and
+  [/layout/layout-rtl/](https://adminlte.io/themes/vue-nuxt/layout/layout-rtl/) rendered
+  byte-identically to the LTR layout — `dir` was `null` and `direction: ltr` on `<html>`, `<body>`,
+  `.app-wrapper` and `.app-main`, with the sidebar still at `x=0`. The prop is now rendered on
+  `.app-wrapper` (so server-rendered markup is directional before hydration) and written to
+  `<html dir>` by the new `useDirection()` composable for as long as the layout is mounted.
+- **Leaving an RTL route restores LTR.** `useDirection()` captures whatever `dir` was on `<html>`
+  beforehand and puts it back on unmount, so one RTL page inside an otherwise LTR SPA cannot flip
+  every route visited afterwards. The demo's RTL stylesheet is loaded (and torn down) the same way,
+  keyed so unhead reconciles the server-rendered `<link>` instead of leaving an orphan behind.
+- **Mailbox inbox rows no longer overflow the page.**
+  [/mailbox/inbox/](https://adminlte.io/themes/vue-nuxt/mailbox/inbox/) scrolled 298px sideways at
+  1440px wide (document `scrollWidth` 1738, `.list-group` 1175 in an 857px box). A flex item's
+  `min-width` defaults to `auto`, so `span.text-truncate` refused to shrink below its content and
+  pushed the row — and the whole document — wide. Both the row link and the elastic middle span
+  carry `min-width: 0`, matching the core HTML template's `mailbox/inbox.astro`.
+- **No more hydration mismatch on the docs Forms page.**
+  [/docs/components/forms/](https://adminlte.io/themes/vue-nuxt/docs/components/forms/) was the only
+  page of 104 audited to log `Hydration completed but contains mismatches.` The cause is not in the
+  markdown or in `@nuxt/content`: adminlte.io has Cloudflare's **Email Obfuscation** enabled, and
+  the `you@example.com` placeholder inside the page's first code sample comes back from the edge as
+  `<a class="__cf_email__">[email&#160;protected]</a>` — an element where Vue's client render
+  produces a text node. It is the only email-shaped string in the whole `content/` tree, and content
+  pages are the only ones rendered from a dynamic vnode tree (`<ContentRenderer>`) rather than
+  static vnodes Vue adopts without comparing, which is why no other page was affected. The docs app
+  now wraps its rendered body in Cloudflare's `<!--email_off-->` … `<!--/email_off-->` opt-out
+  (`apps/docs/server/plugins/email-off.ts`), so the served markup matches what the client renders.
+
+### Added
+
+- **`useDirection(dir)`** exported from `@adminlte/vue` and auto-imported by `@adminlte/nuxt`.
+  Applies `'ltr'` / `'rtl'` to `<html>` while the calling component is mounted, follows changes, and
+  restores the previous value on unmount. SSR-safe — the document is only touched from `onMounted`.
+- **`adminlte: { defaults: { dir: 'rtl' } }` now configures a genuinely RTL app.** The Nuxt module
+  injects `@adminlte/vue/css/rtl` instead of `@adminlte/vue/css` (they are two builds of the same
+  sheet and must never be loaded together) and sets `<html dir="rtl">` server-side. Apps that are
+  only partly RTL leave the option alone and pass `dir` per layout, loading the RTL sheet for those
+  routes themselves.
+- Five unit tests covering the `dir` prop end to end — attribute on `<html>` and the wrapper,
+  reaction to changes, restore-on-unmount, and restore-to-previous-value (59 → 64 tests).
+
+### Docs
+
+- `useDirection` documented on the Component composables page, including how to load the RTL
+  stylesheet globally versus per route, and the `dir` rows in the layout prop table and the Nuxt
+  module defaults table now say what the option actually does.
 
 ## [0.6.0] - 2026-08-19
 

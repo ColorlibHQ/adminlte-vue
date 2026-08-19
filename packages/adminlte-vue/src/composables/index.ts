@@ -30,6 +30,7 @@ export {
   type CommandPaletteApi,
 } from './use-command-palette'
 export { useControlId } from './use-control-id'
+export { useDirection } from './use-direction'
 export { useLteBehaviors } from './use-lte-behaviors'
 export { useAccessibility, type AccessibilityOptions } from './use-accessibility'
 export { useWindowWidth } from './use-window-width'
