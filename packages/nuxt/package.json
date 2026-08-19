@@ -1,7 +1,7 @@
 {
   "name": "@adminlte/nuxt",
-  "version": "0.6.0",
-  "description": "Nuxt module for @adminlte/vue — auto-imports, CSS, Bootstrap init, and SSR-safe theming",
+  "version": "0.7.0",
+  "description": "Nuxt module for @adminlte/vue \u2014 auto-imports, CSS, Bootstrap init, and SSR-safe theming",
   "license": "MIT",
   "type": "module",
   "main": "./dist/module.mjs",
@@ -15,7 +15,14 @@
   "files": [
     "dist"
   ],
-  "keywords": ["nuxt", "nuxt-module", "adminlte", "vue", "bootstrap", "dashboard"],
+  "keywords": [
+    "nuxt",
+    "nuxt-module",
+    "adminlte",
+    "vue",
+    "bootstrap",
+    "dashboard"
+  ],
   "scripts": {
     "build": "nuxt-module-build build",
     "dev": "nuxt-module-build build --stub",
@@ -39,6 +46,8 @@
     "bootstrap": "^5.3.0"
   },
   "peerDependenciesMeta": {
-    "bootstrap": { "optional": true }
+    "bootstrap": {
+      "optional": true
+    }
   }
 }
