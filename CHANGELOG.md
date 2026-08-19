@@ -8,24 +8,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **The docs site's content pages no longer blank out on hydration**
+  ([#3](https://github.com/ColorlibHQ/adminlte-vue/issues/3)). Every content page
+  served complete SSR HTML (7 061 characters on `guide/color-mode`) and then
+  collapsed to the bare layout shell (467) the moment Vue took over, with no
+  console error, no `pageerror` and no hydration-mismatch warning to show for it.
+  The cause is a **trailing slash**, not the `app.baseURL` the earlier note
+  guessed at — the router strips the base correctly. Nuxt prerenders
+  `/guide/color-mode`, so SSR writes its payload under the `useAsyncData` key
+  `doc-/guide/color-mode`; static hosts serve that page as
+  `guide/color-mode/index.html` and redirect the extensionless URL to the
+  directory form, and vue-router hands the trailing slash straight through to
+  `route.path`. The page's key became `doc-/guide/color-mode/`, missed the
+  payload, and on a payload miss during hydration Nuxt does **not** await the
+  replacement fetch — it defers it to `onBeforeMount`. `await useAsyncData(…)`
+  therefore returned with `doc` still `undefined`, the `if (!doc.value) throw
+  createError({ statusCode: 404 })` guard fired, and Nuxt swallows a fatal thrown
+  from an async page setup during hydration (it fires `vue:error`/`app:error` but
+  renders no error page), leaving `<main>` as an empty Suspense placeholder.
+  Verified by instrumenting the running app: `route.path` `/guide/color-mode/`
+  against `payload.path` `/guide/color-mode`, and hooks logging
+  `vue:error "Page not found"` on the exact loads that blanked. The route path is
+  now normalised once, in the new `useDocsPath()` composable, and used for the
+  `useAsyncData` key, the collection query, the prev/next lookup and the sidebar's
+  active link, so client and server agree whichever URL form the host serves. All
+  16 pages now hydrate byte-for-byte identically with and without the trailing
+  slash. The 404 guard is also no longer a hair trigger: an empty `doc` only means
+  "no such page" once the query has actually run (`status !== 'idle'`), so a
+  future key miss would degrade to a late render rather than a silent blank.
+- **The docs table of contents follows the page again.** `<DocsToc>` lives in the
+  persistent layout, so its setup ran exactly once and the `doc-${route.path}` key
+  it snapshotted there pinned the TOC to whichever page was loaded first — every
+  subsequent client-side navigation updated the title, the sidebar and the pager
+  but left the "On this page" rail showing the first page's headings. Pre-existing
+  in 0.7.0 and earlier. The page and the TOC now share one `useCurrentDoc()`
+  composable with a getter key, so a route change re-keys the cached fetch (and
+  the two callers no longer trip Nuxt's dev-only `NUXT_E3004` "different handler"
+  warning for a shared key).
+
 ### Changed
 - The docs' form example no longer uses an email-shaped placeholder, and the
   `email_off` server plugin added alongside it is gone. Cloudflare's Email
   Obfuscation rewrites any `name@host.tld` in a text node, which is what made
   that one page log a hydration mismatch; removing the pattern removes the
-  trigger without a server plugin. See the known issue below — the mismatch was
-  a symptom, not the cause of the docs' content pages rendering empty.
-
-### Known issues
-- **The docs site's content pages hydrate to an empty article.** The server-
-  rendered HTML is complete (7 061 characters on `guide/color-mode`), but after
-  hydration `<article v-if="doc">` collapses to `<!---->` and only the layout
-  shell remains — `queryCollection('docs').path(route.path).first()` resolves to
-  `null` on the client while `_payload.json` and `__nuxt_content/docs/sql_dump.txt`
-  both load with 200. It reproduces identically on the 0.6.0 build, locally and
-  on the deployed site, so it predates the 0.7.0 work; the likely culprit is the
-  `app.baseURL` (`/themes/vue-nuxt/docs/`) leaking into the `useAsyncData` key or
-  the queried path in the subpath export. Tracked separately.
+  trigger without a server plugin. That mismatch was a separate, cosmetic bug —
+  the empty content pages fixed above had a different cause entirely.
 
 ## [0.7.0] - 2026-08-19
 

@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-const route = useRoute()
-
 // Reuses the page's cached fetch (same useAsyncData key).
-const { data: doc } = await useAsyncData(`doc-${route.path}`, () =>
-  queryCollection('docs').path(route.path).first()
-)
+const { data: doc } = await useCurrentDoc()
 
 interface TocLink {
   id: string

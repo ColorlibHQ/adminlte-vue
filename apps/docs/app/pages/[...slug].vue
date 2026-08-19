@@ -1,11 +1,15 @@
 <script setup lang="ts">
-const route = useRoute()
+// Canonical (trailing-slash-free) path. `route.path` carries a trailing slash or
+// not depending on how the host serves the page, and the collection stores only
+// the bare form — see `useDocsPath`.
+const path = useDocsPath()
 
-const { data: doc } = await useAsyncData(`doc-${route.path}`, () =>
-  queryCollection('docs').path(route.path).first()
-)
+const { data: doc, status } = await useCurrentDoc()
 
-if (!doc.value) {
+// `status` is still `idle` when Nuxt deferred the fetch to `onBeforeMount`
+// (a payload-key miss during hydration), so an empty `doc` here does not yet
+// mean the page is missing — only a query that actually ran can say that.
+if (!doc.value && status.value !== 'idle') {
   throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
@@ -17,7 +21,7 @@ useSeoMeta({
   description: () => doc.value?.description,
 })
 
-const idx = computed(() => (pages.value ?? []).findIndex((p) => p.path === route.path))
+const idx = computed(() => (pages.value ?? []).findIndex((p) => p.path === path.value))
 const prev = computed(() => (idx.value > 0 ? pages.value?.[idx.value - 1] : undefined))
 const next = computed(() => {
   const list = pages.value ?? []

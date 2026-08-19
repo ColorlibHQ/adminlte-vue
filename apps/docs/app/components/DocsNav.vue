@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { DOCS_SECTIONS, type DocsPage } from '~/composables/useDocsPages'
 
-const route = useRoute()
+const path = useDocsPath()
 const { data: pages } = await useDocsPages()
 
 // Group the already reading-ordered flat list by section.
@@ -21,7 +21,7 @@ const grouped = computed(() => {
       <div class="docs-nav-heading">{{ section }}</div>
       <ul class="list-unstyled mb-0">
         <li v-for="p in items" :key="p.path">
-          <NuxtLink :to="p.path" class="docs-nav-link" :class="{ active: route.path === p.path }">
+          <NuxtLink :to="p.path" class="docs-nav-link" :class="{ active: path === p.path }">
             {{ p.navTitle || p.title }}
           </NuxtLink>
         </li>
