@@ -163,7 +163,7 @@ definePageMeta({ layout: 'docs' })
                       data-language="html"
                     ><code><span class="line"><span style="color:#808080">&#x3C;</span><span style="color:#569CD6">link</span></span>
 <span class="line"><span style="color:#9CDCFE">  rel</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"stylesheet"</span></span>
-<span class="line"><span style="color:#9CDCFE">  href</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"https://cdn.jsdelivr.net/npm/admin-lte@4.0.0/dist/css/adminlte.min.css"</span></span>
+<span class="line"><span style="color:#9CDCFE">  href</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"https://cdn.jsdelivr.net/npm/admin-lte@4.8.1/dist/css/adminlte.min.css"</span></span>
 <span class="line"><span style="color:#9CDCFE">  integrity</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"sha384-PASTE_THE_HASH_HERE"</span></span>
 <span class="line"><span style="color:#9CDCFE">  crossorigin</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"anonymous"</span></span>
 <span class="line"><span style="color:#808080">/></span></span></code></pre>
@@ -197,7 +197,7 @@ definePageMeta({ layout: 'docs' })
 <span class="line"><span style="color:#808080">  &#x3C;</span><span style="color:#569CD6">link</span><span style="color:#9CDCFE"> rel</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"stylesheet"</span><span style="color:#9CDCFE"> href</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/styles/overlayscrollbars.min.css"</span><span style="color:#808080"> /></span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A9955">  &#x3C;!-- 3. AdminLTE — includes Bootstrap CSS via its imports --></span></span>
-<span class="line"><span style="color:#808080">  &#x3C;</span><span style="color:#569CD6">link</span><span style="color:#9CDCFE"> rel</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"stylesheet"</span><span style="color:#9CDCFE"> href</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"https://cdn.jsdelivr.net/npm/admin-lte@4.0.0/dist/css/adminlte.min.css"</span><span style="color:#808080"> /></span></span>
+<span class="line"><span style="color:#808080">  &#x3C;</span><span style="color:#569CD6">link</span><span style="color:#9CDCFE"> rel</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"stylesheet"</span><span style="color:#9CDCFE"> href</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"https://cdn.jsdelivr.net/npm/admin-lte@4.8.1/dist/css/adminlte.min.css"</span><span style="color:#808080"> /></span></span>
 <span class="line"><span style="color:#808080">&#x3C;/</span><span style="color:#569CD6">head</span><span style="color:#808080">></span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#808080">&#x3C;</span><span style="color:#569CD6">body</span><span style="color:#808080">></span></span>
@@ -214,7 +214,7 @@ definePageMeta({ layout: 'docs' })
 <span class="line"><span style="color:#808080">  &#x3C;</span><span style="color:#569CD6">script</span><span style="color:#9CDCFE"> src</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"https://cdn.jsdelivr.net/npm/overlayscrollbars@2.11.0/browser/overlayscrollbars.browser.es6.min.js"</span><span style="color:#808080">>&#x3C;/</span><span style="color:#569CD6">script</span><span style="color:#808080">></span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#6A9955">  &#x3C;!-- 7. AdminLTE — must load AFTER Bootstrap --></span></span>
-<span class="line"><span style="color:#808080">  &#x3C;</span><span style="color:#569CD6">script</span><span style="color:#9CDCFE"> src</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"https://cdn.jsdelivr.net/npm/admin-lte@4.0.0/dist/js/adminlte.min.js"</span><span style="color:#808080">>&#x3C;/</span><span style="color:#569CD6">script</span><span style="color:#808080">></span></span>
+<span class="line"><span style="color:#808080">  &#x3C;</span><span style="color:#569CD6">script</span><span style="color:#9CDCFE"> src</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"https://cdn.jsdelivr.net/npm/admin-lte@4.8.1/dist/js/adminlte.min.js"</span><span style="color:#808080">>&#x3C;/</span><span style="color:#569CD6">script</span><span style="color:#808080">></span></span>
 <span class="line"><span style="color:#808080">&#x3C;/</span><span style="color:#569CD6">body</span><span style="color:#808080">></span></span></code></pre>
                     <h5 id="defer-or-async">Defer or async?</h5>
                     <p>

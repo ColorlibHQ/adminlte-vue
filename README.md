@@ -12,7 +12,7 @@
 [![Bootstrap 5.3](https://img.shields.io/badge/Bootstrap-5.3-7952B3.svg?logo=bootstrap&logoColor=white)](https://getbootstrap.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-**Status:** v0.2.0 (Early Release) · **Live demo:** [adminlte.io/themes/vue-nuxt](https://adminlte.io/themes/vue-nuxt/)
+**Status:** v0.5.0 (Early Release) · **Live demo:** [adminlte.io/themes/vue-nuxt](https://adminlte.io/themes/vue-nuxt/)
 
 </div>
 
@@ -87,7 +87,8 @@ This is a pnpm monorepo:
 - 📊 **Plugin wrappers** — ApexCharts, Tabulator, Quill, Flatpickr, Tom Select, FullCalendar, jsVectorMap, SortableJS — lazy-loaded and SSR-safe.
 - 📦 **No required runtime dependencies** — beyond the Vue peer; nothing extra forced into your bundle. Plugin libs are *optional* peers.
 - ♿ **Accessibility** — skip links, live region, reduced-motion support out of the box.
-- 🎨 **No SCSS to maintain** — styling comes from the prebuilt `admin-lte` package.
+- 🎨 **No SCSS to maintain** — styling comes from the prebuilt `admin-lte` package (core **4.8.1**).
+- 🌈 **Opt-in color palettes** — `@adminlte/vue/css/colors` (14 extra WCAG-AA colors) or `@adminlte/vue/css/colors/v3` (the AdminLTE 3 palette); `data-lte-primary="teal"` on `<html>` makes any of them Bootstrap's `primary`.
 
 ## Quick start — Nuxt
 

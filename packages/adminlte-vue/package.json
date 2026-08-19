@@ -1,6 +1,6 @@
 {
   "name": "@adminlte/vue",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "AdminLTE 4 Vue 3 component library",
   "license": "MIT",
   "type": "module",
@@ -17,6 +17,8 @@
     },
     "./css": "./dist/css/adminlte.css",
     "./css/rtl": "./dist/css/adminlte.rtl.css",
+    "./css/colors": "./dist/css/adminlte-colors.css",
+    "./css/colors/v3": "./dist/css/adminlte-colors-v3.css",
     "./css/docs": "./dist/css/adminlte-docs.css",
     "./package.json": "./package.json"
   },
@@ -111,7 +113,7 @@
     "@types/sortablejs": "^1.15.8",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/test-utils": "^2.4.10",
-    "admin-lte": "^4.1.0",
+    "admin-lte": "^4.8.1",
     "apexcharts": "^5.13.0",
     "bootstrap": "^5.3.8",
     "flatpickr": "^4.6.13",

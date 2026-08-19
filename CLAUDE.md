@@ -77,8 +77,10 @@ The demo consumes the library's built `dist/`. After editing library source, reb
 2. `vite-plugin-dts` (backed by `vue-tsc`) emits the `.d.ts` tree. It globs **`src/**`** only —
    ambient module declarations must live in `src/shims.d.ts`, **not** root `env.d.ts` (which the dts
    program doesn't see).
-3. A `closeBundle` hook copies `admin-lte/dist/css/adminlte.css` (+ `.rtl.css`) → `dist/css/`
-   (exposed as the `./css` and `./css/rtl` exports). Mirrors the React port's `copy-css` step.
+3. A `closeBundle` hook copies core's prebuilt stylesheets → `dist/css/`: `adminlte.css` (+ `.rtl.css`)
+   as `./css` and `./css/rtl`, the two opt-in palettes `adminlte-colors.css` / `adminlte-colors-v3.css`
+   as `./css/colors` and `./css/colors/v3`, and `adminlte-docs.css` as `./css/docs`. A file it can't
+   read throws. Mirrors the React port's `copy-css` step.
 
 Output is **ESM-only** with **two entries**: `index` (`.`) and `plugins` (`./plugins`). The split
 keeps the heavy plugin libs out of the default import. The build uses **`preserveModules: true`**

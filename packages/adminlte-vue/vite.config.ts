@@ -24,6 +24,16 @@ function copyAdminLteCss() {
       const pairs: Array<[string, string]> = [
         ['admin-lte/dist/css/adminlte.css', 'dist/css/adminlte.css'],
         ['admin-lte/dist/css/adminlte.rtl.css', 'dist/css/adminlte.rtl.css'],
+        // Opt-in colour palettes, added in core 4.4.0 / 4.5.0 (exported as
+        // `@adminlte/vue/css/colors` and `.../css/colors/v3`). Neither is
+        // loaded by default — they only add classes on top of adminlte.css,
+        // and their `data-lte-primary` / `data-lte-contrast` rules outrank
+        // Bootstrap's own by specificity, so load order does not matter. No
+        // RTL variants are copied: core's `.rtl` builds of these two sheets
+        // are byte-identical apart from the source-map comment (colours carry
+        // no directional properties).
+        ['admin-lte/dist/css/adminlte-colors.css', 'dist/css/adminlte-colors.css'],
+        ['admin-lte/dist/css/adminlte-colors-v3.css', 'dist/css/adminlte-colors-v3.css'],
         // Docs-site styles: split out of adminlte.css in core 4.1.0.
         // Applications never need this file — only the demo's cloned docs
         // pages load it (exported as `@adminlte/vue/css/docs`).

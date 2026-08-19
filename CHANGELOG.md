@@ -10,6 +10,46 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _No unreleased changes yet._
 
+## [0.5.0] - 2026-08-19
+
+A dependency-refresh release: AdminLTE core jumps seven minor versions, and the two colour
+stylesheets it grew along the way are re-exported from this package. No breaking changes — the
+default stylesheet is still the only one loaded, and every component renders exactly as before.
+
+### Changed
+
+- **AdminLTE core upgraded to 4.8.1** (from 4.1.0). The bundled stylesheets (`@adminlte/vue/css`, `@adminlte/vue/css/rtl`) pick up everything from core [4.2.0](https://github.com/ColorlibHQ/AdminLTE/blob/master/CHANGELOG.md#420---2026-08-06) through [4.8.1](https://github.com/ColorlibHQ/AdminLTE/blob/master/CHANGELOG.md#481---2026-08-19), most of which lands in `@adminlte/vue` for free because the port ships core's prebuilt CSS:
+  - **Sidebar no longer overflows the viewport.** `.app-sidebar` is a flex column and `.sidebar-wrapper` fills what is left of it, instead of being sized with a hard-coded `100vh − header`. Anything placed above or below the menu now sizes correctly (core 4.4.0).
+  - **`d-print-none` works on the sidebar and the app wrapper.** The print-layout rules from 4.0.0 were `!important` and beat Bootstrap's utility; both are now scoped with `:not(.d-print-none)` (core 4.6.0).
+  - **`data-lte-print="plain"`** on `<html>`, `<body>` or any container prints a page as a document: no `(https://…)` appended after every external link, no black outline around buttons. Useful for invoices and work orders (core 4.7.0). It lives in `adminlte.css`, so it needs no extra stylesheet.
+  - **Sidebar menu items print as text**, not each in a black box (core 4.7.0), and the skip link stays visible on hover (core 4.6.0).
+  - New CSS for **ribbons**, the **social / post widgets** (`.user-block`, `.post`, `.widget-user`) and the **sidebar filter field** (core 4.3.0/4.3.1/4.4.0). There are no `Lte*` components for these yet — the classes are available to hand-written markup.
+  - The **header search and sidebar filter** are restyled as quiet pills coloured from theme-relative tokens, so they no longer turn near-black under `data-bs-theme="dark"` (core 4.4.0).
+
+### Added
+
+- **Two opt-in colour palettes, re-exported.** Core 4.4.0 and 4.5.0 added stylesheets that `adminlte.css` does not include; the library build now copies both and the package exports them:
+  - `@adminlte/vue/css/colors` — the designed palette: 14 extra colours generated so white text on each clears WCAG AA, with the full `.bg-*` / `.text-bg-*` / `.text-*` / `.border-*` / `.link-*` / `.bg-gradient-*` / `.card-*` / `.callout-*` / `.direct-chat-*` families and 17 skin presets.
+  - `@adminlte/vue/css/colors/v3` — the 18 AdminLTE 3 colours with their original values, emitting the same class families.
+
+  Load one or the other (they share class names); neither is loaded by default, and `@adminlte/vue/css` is byte-for-byte what it would be without them. No RTL variants are copied — core's `.rtl` builds of these two sheets differ only in the source-map comment.
+- **`data-lte-primary` works with the port.** With a palette sheet loaded, `<html data-lte-primary="teal">` repoints Bootstrap's `primary` at that colour, so every component you already render with `theme="primary"` — `LteCard`, `LteSmallBox`, `LteButton`, `LteCallout`, `LteDirectChat` — plus links, pagination, `.nav-pills`, progress bars, list groups, accordions and form-control / checkbox focus rings follow it, in both colour modes (core 4.6.0). The typed `theme` props stay the eight Bootstrap names; palette colours are used as plain classes. `data-lte-contrast="aa"` (core 4.8.0) flips the eight AdminLTE 3 colours that miss 4.5:1 to the ink that passes.
+
+### Fixed
+
+- `packages/adminlte-vue/README.md` still imported from the pre-rename `adminlte-vue` in every usage snippet and in the exports table — those lines were copy-paste failures since the package became `@adminlte/vue`. Only the install command had been fixed in 0.3.0.
+
+### Docs
+
+- New **"Extended color palettes"** section on the Color mode guide page: which sheet to load, how to load it in Nuxt and in plain Vue, `data-lte-primary`, and `data-lte-contrast="aa"`.
+- The Deployment page's description of the library build lists all five stylesheets the `closeBundle` hook copies, not two.
+- The cloned core documentation pages pin `admin-lte@4.8.1` in their CDN and `npm install` snippets (they showed 4.0.0), matching core 4.8.1's own docs.
+
+### Notes
+
+- Core's own JavaScript still does not affect this port at runtime — behaviour is re-implemented natively in Vue and `adminlte.js` is never loaded — so the `SidebarSearch` plugin core added in 4.3.0 is CSS-only here until a component wraps it. Theme preferences continue to interoperate with core via the shared `lte-theme` storage key.
+- Core 4.5.0 through 4.8.0 were never published to npm; 4.8.1 is the first release on the registry since 4.4.1 and contains all of them.
+
 ## [0.4.0] - 2026-08-11
 
 Customization work driven by [#2](https://github.com/ColorlibHQ/adminlte-vue/issues/2), a security
@@ -188,7 +228,8 @@ React and Laravel editions.
 - Library JS ships only `dist/css/adminlte.css`; consumers provide Bootstrap Icons, OverlayScrollbars,
   fonts, and plugin CSS (see the demo's `nuxt.config.ts`).
 
-[Unreleased]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.1.0...v0.3.0
 [0.2.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.1.0...v0.2.0

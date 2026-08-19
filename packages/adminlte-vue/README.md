@@ -17,8 +17,8 @@ npm i @adminlte/vue bootstrap
 ```ts
 // main.ts
 import { createApp } from 'vue'
-import AdminLteVue from 'adminlte-vue'
-import 'adminlte-vue/css'          // prebuilt AdminLTE + Bootstrap CSS
+import AdminLteVue from '@adminlte/vue'
+import '@adminlte/vue/css'          // prebuilt AdminLTE + Bootstrap CSS
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import App from './App.vue'
 
@@ -27,7 +27,7 @@ createApp(App).use(AdminLteVue).mount('#app')
 
 ```vue
 <script setup lang="ts">
-import type { MenuNode } from 'adminlte-vue'
+import type { MenuNode } from '@adminlte/vue'
 const menu: MenuNode[] = [
   { type: 'item', text: 'Dashboard', href: '/', icon: 'bi-speedometer' },
   { type: 'group', text: 'Pages', icon: 'bi-files', children: [
@@ -48,18 +48,20 @@ const menu: MenuNode[] = [
 You can also import components individually (tree-shakeable):
 
 ```ts
-import { LteCard, useSidebar } from 'adminlte-vue'
-import { LteApexChart } from 'adminlte-vue/plugins'
+import { LteCard, useSidebar } from '@adminlte/vue'
+import { LteApexChart } from '@adminlte/vue/plugins'
 ```
 
 ## Exports
 
 | Entry | Contents |
 | --- | --- |
-| `adminlte-vue` | ~45 core components + composables + the install plugin (default export) |
-| `adminlte-vue/plugins` | Plugin wrappers (charts, datatable, editor, datepicker, select, calendar, vector map, sortable, kanban). Heavy libs are lazy-loaded and listed as optional peer deps. |
-| `adminlte-vue/css` | Prebuilt AdminLTE + Bootstrap CSS |
-| `adminlte-vue/css/rtl` | RTL CSS variant |
+| `@adminlte/vue` | ~45 core components + composables + the install plugin (default export) |
+| `@adminlte/vue/plugins` | Plugin wrappers (charts, datatable, editor, datepicker, select, calendar, vector map, sortable, kanban). Heavy libs are lazy-loaded and listed as optional peer deps. |
+| `@adminlte/vue/css` | Prebuilt AdminLTE + Bootstrap CSS |
+| `@adminlte/vue/css/rtl` | RTL CSS variant |
+| `@adminlte/vue/css/colors` | Opt-in extended palette (core 4.4.0): 14 extra colors, skins, and `data-lte-primary`. Load after `/css`. |
+| `@adminlte/vue/css/colors/v3` | Opt-in AdminLTE 3 palette (core 4.5.0): the original 18 colors, plus `data-lte-contrast="aa"`. Alternative to the sheet above — do not load both. |
 
 ## Composables
 
