@@ -1,6 +1,6 @@
 {
   "name": "@adminlte/vue",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "AdminLTE 4 Vue 3 component library",
   "license": "MIT",
   "type": "module",

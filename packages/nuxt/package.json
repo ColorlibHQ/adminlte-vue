@@ -1,6 +1,6 @@
 {
   "name": "@adminlte/nuxt",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Nuxt module for @adminlte/vue \u2014 auto-imports, CSS, Bootstrap init, and SSR-safe theming",
   "license": "MIT",
   "type": "module",
