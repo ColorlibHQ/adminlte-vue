@@ -12,7 +12,7 @@
 [![Bootstrap 5.3](https://img.shields.io/badge/Bootstrap-5.3-7952B3.svg?logo=bootstrap&logoColor=white)](https://getbootstrap.com)
 [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-**Status:** v0.5.0 (Early Release) · **Live demo:** [adminlte.io/themes/vue-nuxt](https://adminlte.io/themes/vue-nuxt/)
+**Status:** v0.6.0 (Early Release) · **Live demo:** [adminlte.io/themes/vue-nuxt](https://adminlte.io/themes/vue-nuxt/)
 
 </div>
 

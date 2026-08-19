@@ -5,6 +5,7 @@ import {
   createResolver,
   defineNuxtModule,
 } from '@nuxt/kit'
+import type { NuxtModule } from '@nuxt/schema'
 import { defu } from 'defu'
 
 export interface AdminlteLayoutDefaults {
@@ -112,7 +113,7 @@ const COMPOSABLES = [
   'useCommandPalette',
 ] as const
 
-export default defineNuxtModule<AdminlteModuleOptions>({
+const module: NuxtModule<AdminlteModuleOptions> = defineNuxtModule<AdminlteModuleOptions>({
   meta: {
     name: '@adminlte/nuxt',
     configKey: 'adminlte',
@@ -208,3 +209,5 @@ export default defineNuxtModule<AdminlteModuleOptions>({
     }
   },
 })
+
+export default module

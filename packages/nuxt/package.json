@@ -1,6 +1,6 @@
 {
   "name": "@adminlte/nuxt",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Nuxt module for @adminlte/vue — auto-imports, CSS, Bootstrap init, and SSR-safe theming",
   "license": "MIT",
   "type": "module",
@@ -29,11 +29,11 @@
     "defu": "^6.1.4"
   },
   "devDependencies": {
-    "@nuxt/module-builder": "^1.0.2",
-    "@nuxt/schema": "^4.4.6",
-    "nuxt": "^4.4.6",
-    "typescript": "^5.6.3",
-    "vue": "^3.5.35"
+    "@nuxt/module-builder": "^1.0.3",
+    "@nuxt/schema": "^4.5.2",
+    "nuxt": "^4.5.2",
+    "typescript": "^6.0.3",
+    "vue": "^3.5.41"
   },
   "peerDependencies": {
     "bootstrap": "^5.3.0"

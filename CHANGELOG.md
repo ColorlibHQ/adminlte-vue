@@ -10,6 +10,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _No unreleased changes yet._
 
+## [0.6.0] - 2026-08-19
+
+A toolchain and dependency refresh. Every direct dependency in the workspace is on its latest
+release except three that are held back for stated reasons (below). Two majors land —
+**TypeScript 6** and **ApexCharts 6** — plus Nuxt 4.5. Nothing about the rendered output changes:
+the library builds byte-identical CSS, all 59 unit tests pass, and every chart page in the demo was
+loaded headlessly to confirm ApexCharts 6 still renders.
+
+### Changed
+
+- **ApexCharts 6** (from 5.13.0), and the `apexcharts` peer range widens to `^4.0.0 || ^5.0.0 || ^6.0.0`. `LteApexChart` and `LteSparklineChart` only use the stable surface — `new ApexCharts(el, options)`, `render()`, `updateSeries()`, `updateOptions()`, `destroy()` — so nothing in the components changed. Consumers on ApexCharts 4 or 5 are unaffected; the peer range is additive.
+- **TypeScript 6.0.3** (from 5.9.3) across the workspace. TypeScript 7 is available but **held back** — `typescript-eslint@8.67.0`, the latest release, still declares `typescript: ">=4.8.4 <6.1.0"`, and there is no newer major of it. 6.0.3 is the highest version inside that range.
+- **Nuxt 4.5.2** (from 4.4.6) for `@adminlte/nuxt`, the demo and the docs site, with `@nuxt/kit` / `@nuxt/schema` in step, `@nuxt/module-builder` 1.0.3 and `@nuxt/content` 3.15.2.
+- **Vite 8.2.1** (from 8.0.14), **Vitest 4.1.11** (from 4.1.7), **jsdom 30** (from 29), **Vue 3.5.41** (from 3.5.35), **vue-tsc 3.3.10**, `@vitejs/plugin-vue` 6.0.8, `vite-plugin-dts` 5.0.3, `@vue/test-utils` 2.4.11, `@types/node` 26 (from 22).
+- **Lint stack:** ESLint 10.8.1 (from 10.4.1), `eslint-plugin-vue` 10.10.0, `typescript-eslint` 8.67.0, `globals` 17.11.0.
+- **Plugin libraries:** Tabulator 6.5.2 (from 6.4.0), Tom Select 2.6.2, FullCalendar 6.1.21 (from 6.1.20) across `core` / `daygrid` / `interaction` / `list` / `timegrid`, Playwright 1.62.1.
+- AdminLTE core stays at **4.8.1** — it was just upgraded in 0.5.0 and is current.
+
+### Fixed
+
+- **`@adminlte/nuxt` builds again under Nuxt 4.5.** `@nuxt/schema` 4.5.2 restructured its types such that the type inferred for `defineNuxtModule()`'s result can no longer be named from pnpm's store layout, and `nuxt-module-build` failed with `TS2742: The inferred type of 'default' cannot be named without a reference to '.pnpm/@nuxt+schema@4.5.2/…'`. The module's default export now carries an explicit `NuxtModule<AdminlteModuleOptions>` annotation — the emitted `dist/types.d.mts` already imported that type from `@nuxt/schema`, so the shipped type surface is unchanged.
+- **`import '@adminlte/vue/css/…'` type-checks under TypeScript 6.** The CSS subpath exports have no file extension, so Vite's `*.css` wildcard declaration doesn't match them, and TypeScript 6's new `TS2882` diagnostic rejects a side-effect import it can't resolve to a typed module. The demo declares the five CSS subpaths ambiently; consumers who hit the same diagnostic can do likewise.
+
+### Held back
+
+- **TypeScript 7.0.2** — blocked by `typescript-eslint@8.67.0`'s peer range (`<6.1.0`). Revisit when typescript-eslint ships TypeScript 7 support.
+- **`@fullcalendar/core` 7.0.2** — only `core` has a stable 7; `daygrid`, `interaction`, `list` and `timegrid` are still 6.1.21 (7.0.0-beta/rc at best). The family is kept consistent on 6.1.21, and the library's FullCalendar peers stay `^6.0.0`.
+- **`better-sqlite3` 13.0.3** (docs site) — `@nuxt/content@3.15.2` peers `better-sqlite3: "^12.5.0"`. It does build and prerender all 36 docs routes on 13, but it is an unmet peer on the one package that consumes it, and it adds ~19 MB of foreign-platform prebuilds to the Nitro server bundle. Staying on 12.10.0.
+
 ## [0.5.0] - 2026-08-19
 
 A dependency-refresh release: AdminLTE core jumps seven minor versions, and the two colour
@@ -228,7 +257,8 @@ React and Laravel editions.
 - Library JS ships only `dist/css/adminlte.css`; consumers provide Bootstrap Icons, OverlayScrollbars,
   fonts, and plugin CSS (see the demo's `nuxt.config.ts`).
 
-[Unreleased]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.1.0...v0.3.0

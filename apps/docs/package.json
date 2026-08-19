@@ -1,6 +1,6 @@
 {
   "name": "adminlte-docs",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,13 +13,13 @@
     "lint": "echo 'linting docs...'"
   },
   "dependencies": {
-    "@nuxt/content": "~3.14.0",
+    "@nuxt/content": "~3.15.2",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.13.1"
   },
   "devDependencies": {
     "better-sqlite3": "^12.10.0",
-    "nuxt": "^4.4.6",
-    "vue": "^3.5.35"
+    "nuxt": "^4.5.2",
+    "vue": "^3.5.41"
   }
 }
