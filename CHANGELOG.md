@@ -8,6 +8,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- The docs' form example no longer uses an email-shaped placeholder, and the
+  `email_off` server plugin added alongside it is gone. Cloudflare's Email
+  Obfuscation rewrites any `name@host.tld` in a text node, which is what made
+  that one page log a hydration mismatch; removing the pattern removes the
+  trigger without a server plugin. See the known issue below — the mismatch was
+  a symptom, not the cause of the docs' content pages rendering empty.
+
+### Known issues
+- **The docs site's content pages hydrate to an empty article.** The server-
+  rendered HTML is complete (7 061 characters on `guide/color-mode`), but after
+  hydration `<article v-if="doc">` collapses to `<!---->` and only the layout
+  shell remains — `queryCollection('docs').path(route.path).first()` resolves to
+  `null` on the client while `_payload.json` and `__nuxt_content/docs/sql_dump.txt`
+  both load with 200. It reproduces identically on the 0.6.0 build, locally and
+  on the deployed site, so it predates the 0.7.0 work; the likely culprit is the
+  `app.baseURL` (`/themes/vue-nuxt/docs/`) leaking into the `useAsyncData` key or
+  the queried path in the subpath export. Tracked separately.
+
 ## [0.7.0] - 2026-08-19
 
 Three defects found by a live audit of
