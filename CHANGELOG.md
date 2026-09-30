@@ -8,6 +8,90 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-10-01
+
+**Charts move from ApexCharts to [Chart.js](https://www.chartjs.org/) 4.5 (MIT).** From 5.2.0,
+ApexCharts ships under the proprietary ApexCharts License, which a free, MIT-licensed library cannot
+pass on to its users. This is a **breaking change** to `@adminlte/vue/plugins` and to the components
+`@adminlte/nuxt` auto-registers, so it is a minor bump while the packages are pre-1.0 (0.x semver: a
+minor may break). Nothing outside the chart components changes.
+
+### Breaking
+
+- **`LteApexChart` is removed.** Its replacement is **`LteChart`**, which takes a standard Chart.js
+  config instead of ApexCharts series/options. `@adminlte/nuxt` now auto-registers `LteChart`; a page
+  that still uses `<LteApexChart>` renders an unknown element.
+- **The optional peer dependency `apexcharts` is replaced by `chart.js` `^4.5.0`.**
+
+### Migrating from 0.7
+
+```bash
+pnpm remove apexcharts
+pnpm add chart.js
+```
+
+| ApexCharts (`LteApexChart`) | Chart.js (`LteChart`) |
+| --- | --- |
+| `type="area"` | `type="line"` + `fill: 'start'` on the dataset (use `areaGradient(color)` for the fade) |
+| `type="line"` / `"bar"` | `type="line"` / `"bar"` |
+| `type="donut"` / `"pie"` | `type="doughnut"` (+ `options.cutout`) / `"pie"` |
+| `:series="[{ name, data }]"` | `:data="{ labels, datasets: [{ label, data }] }"` |
+| `options.xaxis.categories` | `data.labels` |
+| `options.colors` | `borderColor` / `backgroundColor` per dataset (optional — the theme palette fills in) |
+| `options.stroke.curve: 'smooth'` | default (`tension: 0.4` in the theme) |
+| `options.legend.show: false` | `options.plugins.legend.display: false` |
+| `options.tooltip.y.formatter` | `options.plugins.tooltip.callbacks.label` |
+| `options.plotOptions.bar.horizontal` | `options.indexAxis: 'y'` |
+| `height` / `width` | unchanged (`height` defaults to 350) |
+| `deep-watch` (on `series`) | `deep-watch` (on `data`) |
+
+```vue
+<!-- 0.7 -->
+<LteApexChart type="area" :series="[{ name: 'Sales', data: [30, 40, 35] }]"
+  :options="{ xaxis: { categories: ['Jan', 'Feb', 'Mar'] } }" />
+
+<!-- 0.8 -->
+<LteChart type="line" :data="{ labels: ['Jan', 'Feb', 'Mar'],
+  datasets: [{ label: 'Sales', data: [30, 40, 35], fill: 'start' }] }" />
+```
+
+`LteSparklineChart` keeps its props (`data`, `type`, `color`, `theme`, `height`) and needs no template
+changes — only the `chart.js` peer. It no longer shows a tooltip: a canvas tooltip would be clipped
+to the 30–60 px box.
+
+### Added
+
+- **`LteChart`** (`@adminlte/vue/plugins`): `type`, `data`, `options`, `plugins`, `height`, `width`,
+  `ariaLabel`, `deepWatch`; exposes `getChart()`. Loads Chart.js in `onMounted`, destroys the
+  instance on unmount (no leaks or "Canvas is already in use" across route changes), resizes with
+  its container (sidebar toggle, collapsed cards, hidden tabs), and copies `data`/`options` so
+  Chart.js never writes into reactive props.
+- **One Chart.js theme preset** (`src/plugins/chart-theme.ts`): font, text, gridline, tooltip and
+  legend colours come from the Bootstrap CSS variables; subtle horizontal gridlines only, rounded
+  bars, smooth lines, Bootstrap-popover tooltips, point-style legends, and the Bootstrap palette for
+  datasets without colours. Charts **re-theme live** when `data-bs-theme` changes on `<html>`, and
+  `dir="rtl"` flips legends and tooltips. Exported helpers: `areaGradient`, `withAlpha`,
+  `resolveColor`, `cssVar`, `applyChartTheme`, `readChartTheme`, `subscribeChartTheme`, and the
+  `LteChartTheme` type.
+- `LteSparklineChart` gains a `width` prop.
+
+### Changed
+
+- The demo's 18 chart instances (Dashboard v1–v3 and **Plugins → Charts**) are rebuilt with
+  Chart.js; the menu entry is now **Charts (Chart.js)** (the `/plugins/charts` route is unchanged).
+  The chart code the demo downloads drops from 262 KB to 71 KB gzipped (whole client JS: 888 KB →
+  696 KB gzipped), which also clears the build's chunk-size warning.
+- Docs, READMEs and the cloned AdminLTE docs pages describe Chart.js instead of ApexCharts.
+
+### Fixed
+
+- **Charts follow dark mode.** The ApexCharts versions kept light-mode axis labels (near-invisible
+  on the dark background) and Dashboard v3's grey striped grid in dark mode.
+- `LteSparklineChart`'s `theme` prop was declared but ignored; it now sets the colour when `color`
+  is not given.
+- The docs FAQ's peer-dependency table listed the chart peer range as `^4.0.0 || ^5.0.0`; it now
+  matches `package.json`.
+
 ## [0.7.1] - 2026-08-19
 
 ### Fixed
@@ -368,7 +452,8 @@ React and Laravel editions.
 - Library JS ships only `dist/css/adminlte.css`; consumers provide Bootstrap Icons, OverlayScrollbars,
   fonts, and plugin CSS (see the demo's `nuxt.config.ts`).
 
-[Unreleased]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.8.0...HEAD
+[0.8.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.7.1...v0.8.0
 [0.7.1]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.5.0...v0.6.0
