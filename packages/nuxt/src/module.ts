@@ -90,7 +90,7 @@ const CORE_COMPONENTS = [
 
 /** Plugin-wrapper components exported from `@adminlte/vue/plugins`. */
 const PLUGIN_COMPONENTS = [
-  'LteApexChart',
+  'LteChart',
   'LteSparklineChart',
   'LteDatatable',
   'LteEditor',

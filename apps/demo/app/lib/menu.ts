@@ -176,7 +176,7 @@ export const menu: MenuNode[] = [
     text: 'Plugins',
     icon: 'bi-plugin',
     children: [
-      { type: 'item', text: 'Charts (ApexCharts)', href: '/plugins/charts', icon: 'bi-circle' },
+      { type: 'item', text: 'Charts (Chart.js)', href: '/plugins/charts', icon: 'bi-circle' },
       { type: 'item', text: 'DataTable (Tabulator)', href: '/plugins/datatable', icon: 'bi-circle' },
       { type: 'item', text: 'Editor (Quill)', href: '/plugins/editor', icon: 'bi-circle' },
       { type: 'item', text: 'Select (Tom Select)', href: '/plugins/select', icon: 'bi-circle' },

@@ -1,49 +1,51 @@
 <script setup lang="ts">
+import { areaGradient } from '@adminlte/vue/plugins'
+
 // Monthly recap sales chart (area).
-const recapSeries = [
-  { name: 'Digital Goods', data: [28, 48, 40, 19, 86, 27, 90] },
-  { name: 'Electronics', data: [65, 59, 80, 81, 56, 55, 40] },
-]
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+const recapData = {
+  labels: months.map((m) => m.slice(0, 3)),
+  datasets: [
+    {
+      label: 'Digital Goods',
+      data: [28, 48, 40, 19, 86, 27, 90],
+      borderColor: '#0d6efd',
+      pointBackgroundColor: '#0d6efd',
+      backgroundColor: areaGradient('#0d6efd'),
+      fill: 'start',
+    },
+    {
+      label: 'Electronics',
+      data: [65, 59, 80, 81, 56, 55, 40],
+      borderColor: '#20c997',
+      pointBackgroundColor: '#20c997',
+      backgroundColor: areaGradient('#20c997'),
+      fill: 'start',
+    },
+  ],
+}
 const recapOptions = {
-  chart: { toolbar: { show: false } },
-  legend: { show: false },
-  colors: ['#0d6efd', '#20c997'],
-  dataLabels: { enabled: false },
-  stroke: { curve: 'smooth' },
-  xaxis: {
-    type: 'datetime',
-    categories: [
-      '2023-01-01',
-      '2023-02-01',
-      '2023-03-01',
-      '2023-04-01',
-      '2023-05-01',
-      '2023-06-01',
-      '2023-07-01',
-    ],
+  plugins: {
+    legend: { display: false },
+    tooltip: { callbacks: { title: (items: Array<{ dataIndex: number }>) => `${months[items[0]!.dataIndex]} 2023` } },
   },
-  tooltip: { x: { format: 'MMMM yyyy' } },
+  scales: { y: { beginAtZero: true } },
 }
 
 // Browser-usage donut.
-const browserSeries = [700, 500, 400, 600, 300, 100]
-const browserOptions = {
+const browserData = {
   labels: ['Chrome', 'Edge', 'FireFox', 'Safari', 'Opera', 'IE'],
-  dataLabels: { enabled: false },
-  colors: ['#0d6efd', '#20c997', '#ffc107', '#d63384', '#6f42c1', '#adb5bd'],
+  datasets: [
+    {
+      label: 'Users',
+      data: [700, 500, 400, 600, 300, 100],
+      backgroundColor: ['#0d6efd', '#20c997', '#ffc107', '#d63384', '#6f42c1', '#adb5bd'],
+    },
+  ],
 }
-
-// Latest-orders table row sparklines.
-const sparklineOptions = {
-  chart: { sparkline: { enabled: true } },
-  colors: ['var(--bs-primary)'],
-  stroke: { width: 2 },
-  tooltip: {
-    fixed: { enabled: false },
-    x: { show: false },
-    y: { title: { formatter: () => '' } },
-    marker: { show: false },
-  },
+const browserOptions = {
+  cutout: '60%',
+  plugins: { legend: { position: 'right' } },
 }
 
 const orders = [
@@ -135,11 +137,12 @@ const products = [
               <div class="col-md-8">
                 <p class="text-center"><strong>Sales: 1 Jan, 2023 - 30 Jul, 2023</strong></p>
                 <ClientOnly>
-                  <LteApexChart
-                    type="area"
+                  <LteChart
+                    type="line"
                     :height="180"
-                    :series="recapSeries"
+                    :data="recapData"
                     :options="recapOptions"
+                    aria-label="Monthly sales, January to July 2023"
                   />
                 </ClientOnly>
               </div>
@@ -418,12 +421,12 @@ const products = [
                     </td>
                     <td>
                       <ClientOnly>
-                        <LteApexChart
+                        <LteSparklineChart
                           type="line"
+                          color="var(--bs-primary)"
                           :width="150"
                           :height="30"
-                          :series="[{ data: o.data }]"
-                          :options="sparklineOptions"
+                          :data="o.data"
                         />
                       </ClientOnly>
                     </td>
@@ -455,11 +458,12 @@ const products = [
           <div class="row">
             <div class="col-12">
               <ClientOnly>
-                <LteApexChart
-                  type="donut"
+                <LteChart
+                  type="doughnut"
                   :height="350"
-                  :series="browserSeries"
+                  :data="browserData"
                   :options="browserOptions"
+                  aria-label="Browser usage share"
                 />
               </ClientOnly>
             </div>

@@ -84,7 +84,8 @@ This is a pnpm monorepo:
 - 🪝 **Composables, not jQuery** — `useSidebar`, `useColorMode`, `useCardWidget`, `useFullscreen`, … via `provide`/`inject` (no Pinia).
 - 🌙 **Native dark mode** through Bootstrap's `data-bs-theme`, with a blocking head script so there's no flash on SSR.
 - ⌘ **Command palette** (⌘K / Ctrl+K) generated from your menu.
-- 📊 **Plugin wrappers** — ApexCharts, Tabulator, Quill, Flatpickr, Tom Select, FullCalendar, jsVectorMap, SortableJS — lazy-loaded and SSR-safe.
+- 📊 **Plugin wrappers** — Chart.js, Tabulator, Quill, Flatpickr, Tom Select, FullCalendar, jsVectorMap, SortableJS — lazy-loaded and SSR-safe.
+- 📈 **Charts are [Chart.js](https://www.chartjs.org/) (MIT)** — `LteChart` and `LteSparklineChart` share one AdminLTE theme preset that follows dark mode and RTL live.
 - 📦 **No required runtime dependencies** — beyond the Vue peer; nothing extra forced into your bundle. Plugin libs are *optional* peers.
 - ♿ **Accessibility** — skip links, live region, reduced-motion support out of the box.
 - 🎨 **No SCSS to maintain** — styling comes from the prebuilt `admin-lte` package (core **4.8.1**).
@@ -180,7 +181,7 @@ module just automates the wiring above.
 
 **Tools** — `LteModal`, `LteWizard`, `LteWizardStep`
 
-**Plugins** (`@adminlte/vue/plugins`) — `LteApexChart`, `LteSparklineChart`, `LteDatatable`,
+**Plugins** (`@adminlte/vue/plugins`) — `LteChart`, `LteSparklineChart`, `LteDatatable`,
 `LteEditor`, `LteFlatpickr`, `LteTomSelect`, `LteCalendar`, `LteVectorMap`, `LteSortable`,
 `LteKanban`
 

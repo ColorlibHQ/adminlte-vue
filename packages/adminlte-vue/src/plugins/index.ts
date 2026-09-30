@@ -1,4 +1,4 @@
-export { default as LteApexChart } from './LteApexChart.vue'
+export { default as LteChart } from './LteChart.vue'
 export { default as LteSparklineChart } from './LteSparklineChart.vue'
 export { default as LteDatatable } from './LteDatatable.vue'
 export { default as LteEditor } from './LteEditor.vue'
@@ -9,3 +9,13 @@ export { default as LteVectorMap } from './LteVectorMap.vue'
 export { default as LteSortable } from './LteSortable.vue'
 export { default as LteKanban } from './LteKanban.vue'
 export type { KanbanCard, KanbanColumn } from './LteKanban.vue'
+export {
+  applyChartTheme,
+  readChartTheme,
+  areaGradient,
+  withAlpha,
+  resolveColor,
+  cssVar,
+  subscribeChartTheme,
+} from './chart-theme'
+export type { LteChartTheme } from './chart-theme'

@@ -1,37 +1,49 @@
 <script setup lang="ts">
 // Online Store Visitors (line) — mirrors the original AdminLTE 4 dashboard v3 demo.
-const visitorsSeries = [
-  { name: 'High - 2023', data: [100, 120, 170, 167, 180, 177, 160] },
-  { name: 'Low - 2023', data: [60, 80, 70, 67, 80, 77, 100] },
-]
+const visitorsData = {
+  labels: ['22th', '23th', '24th', '25th', '26th', '27th', '28th'],
+  datasets: [
+    {
+      label: 'High - 2023',
+      data: [100, 120, 170, 167, 180, 177, 160],
+      borderColor: '#0d6efd',
+      backgroundColor: '#0d6efd',
+      pointRadius: 3,
+    },
+    {
+      label: 'Low - 2023',
+      data: [60, 80, 70, 67, 80, 77, 100],
+      borderColor: '#adb5bd',
+      backgroundColor: '#adb5bd',
+      pointRadius: 3,
+    },
+  ],
+}
 const visitorsOptions = {
-  chart: { toolbar: { show: false } },
-  colors: ['#0d6efd', '#adb5bd'],
-  stroke: { curve: 'smooth' },
-  grid: {
-    borderColor: '#e7e7e7',
-    row: { colors: ['#f3f3f3', 'transparent'], opacity: 0.5 },
-  },
-  legend: { show: false },
-  markers: { size: 1 },
-  xaxis: { categories: ['22th', '23th', '24th', '25th', '26th', '27th', '28th'] },
+  plugins: { legend: { display: false } },
 }
 
-// Sales (bar)
-const salesSeries = [
-  { name: 'Net Profit', data: [44, 55, 57, 56, 61, 58, 63, 60, 66] },
-  { name: 'Revenue', data: [76, 85, 101, 98, 87, 105, 91, 114, 94] },
-  { name: 'Free Cash Flow', data: [35, 41, 36, 26, 45, 48, 52, 53, 41] },
-]
+// Sales (grouped bar)
+const salesData = {
+  labels: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+  datasets: [
+    { label: 'Net Profit', data: [44, 55, 57, 56, 61, 58, 63, 60, 66], backgroundColor: '#0d6efd' },
+    { label: 'Revenue', data: [76, 85, 101, 98, 87, 105, 91, 114, 94], backgroundColor: '#20c997' },
+    { label: 'Free Cash Flow', data: [35, 41, 36, 26, 45, 48, 52, 53, 41], backgroundColor: '#ffc107' },
+  ],
+}
 const salesOptions = {
-  plotOptions: { bar: { horizontal: false, columnWidth: '55%', endingShape: 'rounded' } },
-  legend: { show: false },
-  colors: ['#0d6efd', '#20c997', '#ffc107'],
-  dataLabels: { enabled: false },
-  stroke: { show: true, width: 2, colors: ['transparent'] },
-  xaxis: { categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'] },
-  fill: { opacity: 1 },
-  tooltip: { y: { formatter: (val: number) => '$ ' + val + ' thousands' } },
+  datasets: { bar: { categoryPercentage: 0.55, barPercentage: 0.85 } },
+  plugins: {
+    legend: { display: false },
+    tooltip: {
+      callbacks: {
+        label: (item: { dataset: { label?: string }; raw: unknown }) =>
+          `${item.dataset.label}: $ ${item.raw} thousands`,
+      },
+    },
+  },
+  scales: { y: { beginAtZero: true } },
 }
 </script>
 
@@ -66,11 +78,12 @@ const salesOptions = {
 
           <div class="position-relative mb-4">
             <ClientOnly>
-              <LteApexChart
+              <LteChart
                 type="line"
                 :height="200"
-                :series="visitorsSeries"
+                :data="visitorsData"
                 :options="visitorsOptions"
+                aria-label="Online store visitors, this week and last week"
               />
             </ClientOnly>
           </div>
@@ -214,11 +227,12 @@ const salesOptions = {
 
           <div class="position-relative mb-4">
             <ClientOnly>
-              <LteApexChart
+              <LteChart
                 type="bar"
                 :height="200"
-                :series="salesSeries"
+                :data="salesData"
                 :options="salesOptions"
+                aria-label="Net profit, revenue and free cash flow by month"
               />
             </ClientOnly>
           </div>

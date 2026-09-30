@@ -30,6 +30,6 @@ The **demo app** is a 1:1 AdminLTE 4 showcase of every component and page — th
 - **SSR-safe** — every browser API is isolated to `onMounted`/effects; no hydration mismatches.
 - **Color mode** with a blocking head script (no flash of the wrong theme).
 - **Composables + provide/inject** for state (no Pinia required in the library).
-- **Heavy plugins are dynamic-imported** (ApexCharts, FullCalendar, Tabulator, Quill, …) and stay out of the default bundle.
+- **Heavy plugins are dynamic-imported** (Chart.js, FullCalendar, Tabulator, Quill, …) and stay out of the default bundle.
 
 > Looking to get going fast? Jump to [Installation](/getting-started/installation).

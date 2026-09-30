@@ -39,7 +39,7 @@ const page = await ctx.newPage()
 async function shoot(url, file) {
   await page.goto(url, { waitUntil: 'networkidle', timeout: 60000 })
   await page.evaluate((theme) => document.documentElement.setAttribute('data-bs-theme', theme), THEME)
-  await page.waitForTimeout(2500) // let ApexCharts / async widgets settle
+  await page.waitForTimeout(2500) // let Chart.js / async widgets settle
   await page.screenshot({ path: file, fullPage: true })
 }
 

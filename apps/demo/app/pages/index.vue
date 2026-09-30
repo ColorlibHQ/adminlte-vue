@@ -1,30 +1,36 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
+import { areaGradient } from '@adminlte/vue/plugins'
 
 // Sales Value area chart (mirrors the original AdminLTE 4 dashboard demo).
-const salesSeries = [
-  { name: 'Digital Goods', data: [28, 48, 40, 19, 86, 27, 90] },
-  { name: 'Electronics', data: [65, 59, 80, 81, 56, 55, 40] },
-]
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+const salesData = {
+  labels: months.map((m) => m.slice(0, 3)),
+  datasets: [
+    {
+      label: 'Digital Goods',
+      data: [28, 48, 40, 19, 86, 27, 90],
+      borderColor: '#0d6efd',
+      pointBackgroundColor: '#0d6efd',
+      backgroundColor: areaGradient('#0d6efd'),
+      fill: 'start',
+    },
+    {
+      label: 'Electronics',
+      data: [65, 59, 80, 81, 56, 55, 40],
+      borderColor: '#20c997',
+      pointBackgroundColor: '#20c997',
+      backgroundColor: areaGradient('#20c997'),
+      fill: 'start',
+    },
+  ],
+}
 const salesOptions = {
-  chart: { toolbar: { show: false } },
-  legend: { show: false },
-  colors: ['#0d6efd', '#20c997'],
-  dataLabels: { enabled: false },
-  stroke: { curve: 'smooth' },
-  xaxis: {
-    type: 'datetime',
-    categories: [
-      '2023-01-01',
-      '2023-02-01',
-      '2023-03-01',
-      '2023-04-01',
-      '2023-05-01',
-      '2023-06-01',
-      '2023-07-01',
-    ],
+  plugins: {
+    legend: { display: false },
+    tooltip: { callbacks: { title: (items: Array<{ dataIndex: number }>) => `${months[items[0]!.dataIndex]} 2023` } },
   },
-  tooltip: { x: { format: 'MMMM yyyy' } },
+  scales: { y: { beginAtZero: true } },
 }
 
 // Footer sparklines for the world-map card.
@@ -97,11 +103,12 @@ onMounted(async () => {
       <div class="col-lg-7 connectedSortable">
         <LteCard title="Sales Value" class="mb-4">
           <ClientOnly>
-            <LteApexChart
-              type="area"
+            <LteChart
+              type="line"
               :height="300"
-              :series="salesSeries"
+              :data="salesData"
               :options="salesOptions"
+              aria-label="Sales value by month"
             />
           </ClientOnly>
         </LteCard>

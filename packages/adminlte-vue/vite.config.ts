@@ -92,7 +92,7 @@ export default defineConfig({
         'vue',
         /^vue\//,
         'bootstrap',
-        'apexcharts',
+        'chart.js',
         'tabulator-tables',
         'quill',
         'flatpickr',

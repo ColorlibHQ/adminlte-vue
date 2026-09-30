@@ -92,7 +92,7 @@ live at `dist/plugins/index.d.ts` (the entry JS stays `dist/plugins.js`).
 > identifier collision in a shared chunk (`LteTomSelect`). Libraries should ship readable ESM and let
 > the consuming app minify, so minify is disabled. Keep it off.
 
-Heavy plugin libs (`apexcharts`, `tabulator-tables`, `quill`, `flatpickr`, `tom-select`,
+Heavy plugin libs (`chart.js`, `tabulator-tables`, `quill`, `flatpickr`, `tom-select`,
 `sortablejs`, `jsvectormap`, `overlayscrollbars`, `@fullcalendar/*`) plus `vue`/`bootstrap` are
 `external` in `rollupOptions` and declared **optional** `peerDependencies` — never bundled.
 
@@ -142,7 +142,7 @@ command palette.
 ### Dynamic-import plugin pattern
 Heavy libs are **never** statically imported. Each wrapper in `src/plugins/*.vue` does
 `await import(...)` inside `onMounted`, guards `if (!el.value) return` (component may unmount before
-the import resolves), and destroys the instance in `onBeforeUnmount`. **`LteApexChart.vue` is the
+the import resolves), and destroys the instance in `onBeforeUnmount`. **`LteChart.vue` is the
 reference implementation.** In the demo, wrap these components in **`<ClientOnly>`** with a
 `#fallback`. Consumers install the matching lib as their own dep + load its CSS.
 

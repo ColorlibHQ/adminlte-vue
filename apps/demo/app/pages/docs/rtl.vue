@@ -172,7 +172,7 @@ definePageMeta({ layout: 'docs' })
                       </li>
                       <li>
                         Inline images, charts, and third-party widgets — their internal layout
-                        doesn’t react to <code>dir</code>. Check each integration (ApexCharts,
+                        doesn’t react to <code>dir</code>. Check each integration (Chart.js,
                         FullCalendar, Tabulator) for an RTL option.
                       </li>
                       <li>

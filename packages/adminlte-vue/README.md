@@ -9,7 +9,7 @@ everything and handles SSR-safe theming.
 ```bash
 npm i @adminlte/vue bootstrap
 # optional plugin libs, only if you use the matching components:
-# apexcharts tabulator-tables quill flatpickr tom-select sortablejs jsvectormap overlayscrollbars @fullcalendar/core @fullcalendar/daygrid @fullcalendar/interaction
+# chart.js tabulator-tables quill flatpickr tom-select sortablejs jsvectormap overlayscrollbars @fullcalendar/core @fullcalendar/daygrid @fullcalendar/interaction
 ```
 
 ## Usage
@@ -49,7 +49,7 @@ You can also import components individually (tree-shakeable):
 
 ```ts
 import { LteCard, useSidebar } from '@adminlte/vue'
-import { LteApexChart } from '@adminlte/vue/plugins'
+import { LteChart } from '@adminlte/vue/plugins'
 ```
 
 ## Exports
@@ -57,7 +57,7 @@ import { LteApexChart } from '@adminlte/vue/plugins'
 | Entry | Contents |
 | --- | --- |
 | `@adminlte/vue` | ~45 core components + composables + the install plugin (default export) |
-| `@adminlte/vue/plugins` | Plugin wrappers (charts, datatable, editor, datepicker, select, calendar, vector map, sortable, kanban). Heavy libs are lazy-loaded and listed as optional peer deps. |
+| `@adminlte/vue/plugins` | Plugin wrappers (charts — Chart.js, MIT — datatable, editor, datepicker, select, calendar, vector map, sortable, kanban). Heavy libs are lazy-loaded and listed as optional peer deps. |
 | `@adminlte/vue/css` | Prebuilt AdminLTE + Bootstrap CSS |
 | `@adminlte/vue/css/rtl` | RTL CSS variant |
 | `@adminlte/vue/css/colors` | Opt-in extended palette (core 4.4.0): 14 extra colors, skins, and `data-lte-primary`. Load after `/css`. |

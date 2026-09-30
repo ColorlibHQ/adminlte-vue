@@ -260,31 +260,10 @@ definePageMeta({ layout: 'docs' })
 <span class="line"><span style="color:#D4D4D4">  })</span></span>
 <span class="line"><span style="color:#808080">&#x3C;/</span><span style="color:#569CD6">script</span><span style="color:#808080">></span></span></code></pre>
                     <h5 id="charts">Charts</h5>
-                    <h6 id="apexcharts">ApexCharts</h6>
-                    <p>
-                      <a href="https://apexcharts.com/">ApexCharts</a> is the chart library used in
-                      the AdminLTE dashboards. Modern look, animated, MIT.
-                    </p>
-                    <pre
-                      class="astro-code dark-plus"
-                      style="background-color: #1e1e1e; color: #d4d4d4; overflow-x: auto"
-                      tabindex="0"
-                      data-language="html"
-                    ><code><span class="line"><span style="color:#808080">&#x3C;</span><span style="color:#569CD6">script</span><span style="color:#9CDCFE"> src</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"https://cdn.jsdelivr.net/npm/apexcharts@5.12.0/dist/apexcharts.min.js"</span><span style="color:#808080">>&#x3C;/</span><span style="color:#569CD6">script</span><span style="color:#808080">></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#808080">&#x3C;</span><span style="color:#569CD6">div</span><span style="color:#9CDCFE"> id</span><span style="color:#D4D4D4">=</span><span style="color:#CE9178">"chart"</span><span style="color:#808080">>&#x3C;/</span><span style="color:#569CD6">div</span><span style="color:#808080">></span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#808080">&#x3C;</span><span style="color:#569CD6">script</span><span style="color:#808080">></span></span>
-<span class="line"><span style="color:#569CD6">  new</span><span style="color:#DCDCAA"> ApexCharts</span><span style="color:#D4D4D4">(</span><span style="color:#9CDCFE">document</span><span style="color:#D4D4D4">.</span><span style="color:#DCDCAA">querySelector</span><span style="color:#D4D4D4">(</span><span style="color:#CE9178">"#chart"</span><span style="color:#D4D4D4">), {</span></span>
-<span class="line"><span style="color:#9CDCFE">    chart:</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">type:</span><span style="color:#CE9178"> "area"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">height:</span><span style="color:#B5CEA8"> 300</span><span style="color:#D4D4D4"> },</span></span>
-<span class="line"><span style="color:#9CDCFE">    series:</span><span style="color:#D4D4D4"> [{ </span><span style="color:#9CDCFE">name:</span><span style="color:#CE9178"> "Visits"</span><span style="color:#D4D4D4">, </span><span style="color:#9CDCFE">data:</span><span style="color:#D4D4D4"> [</span><span style="color:#B5CEA8">30</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">40</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">35</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">50</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">49</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">60</span><span style="color:#D4D4D4">, </span><span style="color:#B5CEA8">70</span><span style="color:#D4D4D4">] }],</span></span>
-<span class="line"><span style="color:#9CDCFE">    xaxis:</span><span style="color:#D4D4D4"> { </span><span style="color:#9CDCFE">categories:</span><span style="color:#D4D4D4"> [</span><span style="color:#CE9178">"Mon"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"Tue"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"Wed"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"Thu"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"Fri"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"Sat"</span><span style="color:#D4D4D4">, </span><span style="color:#CE9178">"Sun"</span><span style="color:#D4D4D4">] }</span></span>
-<span class="line"><span style="color:#D4D4D4">  }).</span><span style="color:#DCDCAA">render</span><span style="color:#D4D4D4">()</span></span>
-<span class="line"><span style="color:#808080">&#x3C;/</span><span style="color:#569CD6">script</span><span style="color:#808080">></span></span></code></pre>
                     <h6 id="chartjs">Chart.js</h6>
                     <p>
-                      <a href="https://www.chartjs.org/">Chart.js</a> is the most-asked-for
-                      traditional chart library. Canvas-based, very wide chart-type support.
+                      <a href="https://www.chartjs.org/">Chart.js</a> is the chart library used in
+                      the AdminLTE Vue dashboards. Canvas-based, very wide chart-type support, MIT.
                     </p>
                     <pre
                       class="astro-code dark-plus"
