@@ -88,7 +88,7 @@ This is a pnpm monorepo:
 - 📈 **Charts are [Chart.js](https://www.chartjs.org/) (MIT)** — `LteChart` and `LteSparklineChart` share one AdminLTE theme preset that follows dark mode and RTL live.
 - 📦 **No required runtime dependencies** — beyond the Vue peer; nothing extra forced into your bundle. Plugin libs are *optional* peers.
 - ♿ **Accessibility** — skip links, live region, reduced-motion support out of the box.
-- 🎨 **No SCSS to maintain** — styling comes from the prebuilt `admin-lte` package (core **4.8.1**).
+- 🎨 **No SCSS to maintain** — styling comes from the prebuilt `admin-lte` package (core **4.10.2**).
 - 🌈 **Opt-in color palettes** — `@adminlte/vue/css/colors` (14 extra WCAG-AA colors) or `@adminlte/vue/css/colors/v3` (the AdminLTE 3 palette); `data-lte-primary="teal"` on `<html>` makes any of them Bootstrap's `primary`.
 
 ## Quick start — Nuxt

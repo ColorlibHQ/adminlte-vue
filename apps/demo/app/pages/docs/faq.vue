@@ -138,7 +138,7 @@ definePageMeta({ layout: 'docs' })
                       </span>
                     </summary>
                     <div class="faq-answer">
-                      Bootstrap 5.3.x. The current <code>package.json</code> pins 5.3.8 — older 5.3
+                      Bootstrap 5.3.x. The current <code>package.json</code> pins 5.3.9 — older 5.3
                       minors should work but aren't tested. Bootstrap 5.0 / 5.1 / 5.2 will not work
                       (the color-mode and <code>data-bs-theme</code> system landed in 5.3).
                     </div>
