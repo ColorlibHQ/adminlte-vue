@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Docs site:** the intro page linked to `https://adminlte.io`, which is same-origin on the deployed site, so Nuxt tried to prefetch it as an internal route and logged `NUXT_E7001`/`NUXT_E7003` console errors. It now links to the AdminLTE repository.
+
 ## [0.8.1] - 2026-11-17
 
 Dependency and toolchain refresh on AdminLTE core **4.10.2** (Bootstrap **5.3.9** compiled in). No API
