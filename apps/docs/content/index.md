@@ -7,7 +7,7 @@ icon: bi-rocket-takeoff
 order: 1
 ---
 
-**AdminLTE Vue** (the `@adminlte/vue` package) is a faithful port of [AdminLTE 4](https://adminlte.io)
+**AdminLTE Vue** (the `@adminlte/vue` package) is a faithful port of [AdminLTE 4](https://github.com/ColorlibHQ/AdminLTE)
 (Bootstrap 5.3) for **Vue 3 & Nuxt**. It comes in two pieces so you can adopt as much or as little as
 you need:
 
