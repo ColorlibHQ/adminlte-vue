@@ -64,7 +64,7 @@ body {
   padding: 2rem 0;
 }
 @media (max-width: 991.98px) {
-  .docs-body { grid-template-columns: 1fr; }
+  .docs-body { grid-template-columns: minmax(0, 1fr); }
   .docs-sidebar, .docs-rail { position: static; height: auto; overflow: visible; }
   .docs-rail { display: none; }
 }
@@ -154,6 +154,9 @@ body {
 }
 .docs-prose pre code { background: none !important; padding: 0; }
 .docs-prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
   width: 100%;
   margin-bottom: 1.5rem;
   border-collapse: collapse;

@@ -8,6 +8,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.8.1] - 2026-11-17
+
+Dependency and toolchain refresh on AdminLTE core **4.10.2** (Bootstrap **5.3.9** compiled in). No API
+changes.
+
+### Changed
+
+- **`admin-lte` 4.8.1 → 4.10.2.** The shipped stylesheets (`./css`, `./css/rtl`, the opt-in palettes
+  `./css/colors` and `./css/colors/v3`, `./css/docs`) come from the new core: print defaults (the app shell
+  — header, sidebar, footer — no longer prints; `data-lte-print="app"` brings it back, `plain` strips
+  chrome), `data-lte-contrast="aa"`, `data-lte-primary` theming, the `.modal-xxl` size and
+  reduced-motion-aware placeholders. Verified by printing the demo invoice to a single PDF sheet.
+- **Bootstrap 5.3.8 → 5.3.9** (demo, docs and dev dependency; the `bootstrap` peer range stays `^5.3.0`).
+- Dependencies refreshed to latest: Vue 3.5.45, Nuxt 4.6.4, `@nuxt/content` 3.16, Vite 8.3, Vitest 5.1,
+  jsdom 31, `@vue/test-utils` 2.6, ESLint 10.15, typescript-eslint 8.73, Chart.js 4.6.1, Tabulator 6.7.1,
+  Tom Select 2.7.0, OverlayScrollbars 2.17.0, Bootstrap Icons 1.13.2, `better-sqlite3` 13, Playwright 1.65.
+  The `@nuxt/kit` range stays `^4.0.0` so the module keeps supporting every Nuxt 4.
+- Held back: **TypeScript stays on 6.0.3** (typescript-eslint peers `<6.1.0`, `@nuxt/module-builder`
+  peers `^5.9.3`); **FullCalendar stays on 6.1.22** (v7 changes the CSS/theme API and would break the
+  `^6.0.0` peer range of `LteCalendar`); `pnpm` stays on 9.12.0.
+
+### Fixed
+
+- **Demo:** the Calendar page toolbar no longer overflows 390px screens; the cloned docs pages scroll
+  wide tables instead of overflowing.
+- **Docs site:** wide tables and code no longer blow out the single-column mobile grid.
+
+### Security
+
+- `minimatch` and `glob` are overridden to patched releases. Remaining advisories are
+  build-time only: `quill` 2.0.3 (no patched release; XSS in the HTML-export feature) and `zod` 3 inside
+  `@nuxt/content` (docs build only).
+
 ## [0.8.0] - 2026-10-01
 
 **Charts move from ApexCharts to [Chart.js](https://www.chartjs.org/) 4.5 (MIT).** From 5.2.0,
@@ -452,7 +485,8 @@ React and Laravel editions.
 - Library JS ships only `dist/css/adminlte.css`; consumers provide Bootstrap Icons, OverlayScrollbars,
   fonts, and plugin CSS (see the demo's `nuxt.config.ts`).
 
-[Unreleased]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.8.0...HEAD
+[Unreleased]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.8.1...HEAD
+[0.8.1]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.8.0...v0.8.1
 [0.8.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.7.1...v0.8.0
 [0.7.1]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/ColorlibHQ/adminlte-vue/compare/v0.6.0...v0.7.0

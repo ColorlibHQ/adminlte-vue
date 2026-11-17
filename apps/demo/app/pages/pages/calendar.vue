@@ -159,3 +159,11 @@ onBeforeUnmount(() => {
             </div>
   </LteAppContent>
 </template>
+
+<style>
+/* Let the FullCalendar toolbar wrap instead of overflowing narrow viewports. */
+#calendar .fc-header-toolbar {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+</style>

@@ -12,3 +12,13 @@ import { docsMenu } from '~/lib/docsMenu'
     <slot />
   </DemoLayout>
 </template>
+
+<style>
+/* The cloned docs render bare <table>s (core wraps them in .table-responsive at
+   build time); scroll them inside the page instead of overflowing narrow screens. */
+.docs-page .app-main table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+</style>
